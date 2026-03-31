@@ -5,12 +5,13 @@
     </a>
   </div>
   <div class="offcanvas-body">
+        <div class="d-flex align-items-center my-3">
+            <a href="/profile" style="text-decoration:none;" class="text-light" type="button">
+                <i class="bi bi-person"></i>
+            </a>
+        </div>    
+
         @canany(['isUser', 'isSeller'])
-            <div class="d-flex align-items-center my-3">
-                <a href="/" style="text-decoration:none;" class="text-light" type="button">
-                    <i class="bi bi-person"></i>
-                </a>
-            </div>
 
             <div class="d-flex align-items-center my-3">
                 <a href="/" style="text-decoration:none;" class="text-light" type="button">
@@ -33,12 +34,6 @@
         @endcanany
 
         @can('isAdmin')
-            <div class="d-flex align-items-center my-3">
-                <a href="/" style="text-decoration:none;" class="text-light" type="button">
-                    <i class="bi bi-person"></i>
-                </a>
-            </div>
-
             <div class="d-flex align-items-center my-3">
                 <a href="/" style="text-decoration:none;" class="text-light" type="button">
                     <i class="bi bi-boxes"></i>
