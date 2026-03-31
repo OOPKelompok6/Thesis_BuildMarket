@@ -4,10 +4,8 @@
         @auth
             <x-sideBar></x-sideBar>
         @endauth
-        <div>
-            {{-- Content of pages --}}
-            {{ $slot }} 
-        </div>
+        {{-- Content of pages here --}}
+        {{ $slot }} 
         <x-footer></x-footer>
     </div>
 </x-headLayout>
