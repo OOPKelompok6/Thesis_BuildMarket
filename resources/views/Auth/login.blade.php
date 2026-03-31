@@ -1,7 +1,7 @@
 <x-headLayout>
   <div id="screenContainer" class="d-flex flex-row min-vh-100 min-vw-100">
     <div id="mainContainer"class="d-flex flex-column bg-light min-vh-100 w-50">
-      <a>
+      <a href="/">
         <i class="bi bi-house fs-2 ms-1"></i>
       </a>
 

@@ -20,4 +20,8 @@ class UserService
     public function createUser($user) {
         $user = User::create($user);
     }
+
+    public function logOut() {
+        Auth::logout();
+    }
 }

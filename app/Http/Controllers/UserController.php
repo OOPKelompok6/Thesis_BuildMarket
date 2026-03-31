@@ -32,10 +32,6 @@ class UserController extends Controller
         return redirect('/');
     }
 
-    public function logout() {
-        return view('Auth.login');
-    }
-
     public function createUser() {
         $user = request()->validate([
             'firstName' => 'required',
@@ -48,8 +44,8 @@ class UserController extends Controller
         return redirect('/login');
     }
 
-    // public function destroy() {
-    //     Auth::logout();
-    //     return redirect('/');
-    // }
+    public function logout() {
+        $this->userService->logOut();
+        return redirect('/');
+    }
 }
