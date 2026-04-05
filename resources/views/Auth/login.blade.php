@@ -14,9 +14,11 @@
         <x-formTextFields class="w-75"
           message="Email" name="email" type="email" formId="emailInput" innerClass="form-control bg-light">
         </x-formTextFields>
+        <x-errorValidationLabel name="email"></x-errorValidationLabel>
         <x-formTextFields class="w-75"
           message="Password" name="password" type="password" formId="passwordInput" innerClass="form-control bg-light">
         </x-formTextFields>
+        <x-errorValidationLabel name="password"></x-errorValidationLabel>
         <x-authShared.authButtons message="Log In" type="submit"/>
         <x-authShared.accountConfirmText id="registerHelp" 
         message="Dont have an account?"
