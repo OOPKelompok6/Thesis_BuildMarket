@@ -8,17 +8,18 @@ use App\Models\User;
 
 class UserService
 {
-    public function authenticateUser($user) {
-        if(!Auth::attempt($user)) {
-            throw ValidationException::withMessages([
-                'email' => 'Sorry email does not match',
-                'password' => 'Wrong password'
-            ]);
-        }
-    }
 
     public function createUser($user) {
         $user = User::create($user);
+    }
+
+    public function updateUser($user) {
+        $curUser = Auth::user();
+        $curUser->firstName = $user['firstName'];
+        $curUser->lastName = $user['lastName'];
+        $curUser->email = $user['email'];
+
+        $curUser->save();
     }
 
     public function logOut() {
