@@ -81,8 +81,6 @@ class UserController extends Controller
             'password.numbers' => 'Password must contain numbers.',
         ]);
 
-        dd($user->user()->all());
-
         $this->userService->createUser($user);
         return redirect('/login');
     }
