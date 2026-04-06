@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignIdFor(User::class);
             $table->string('vendor');
             $table->datetime('expiration_Date');
-            $table->string('cardNumber');
-            $table->string('billingAdress');
+            $table->text('cardNumber');
+            $table->string('billingAddress');
             $table->timestamps();
         });
     }

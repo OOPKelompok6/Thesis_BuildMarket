@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Item::class);
-            $table->longText('review');
+            $table->text('review');
             $table->timestamps();
         });
     }

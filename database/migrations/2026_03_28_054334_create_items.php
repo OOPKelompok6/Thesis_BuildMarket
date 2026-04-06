@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('quantity');
-            $table->longText('description');
+            $table->text('description');
             $table->integer('price');
             $table->foreignIdFor(Brand::class);
             $table->foreignIdFor(Category::class);
