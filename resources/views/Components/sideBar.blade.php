@@ -14,7 +14,7 @@
         @canany(['isUser', 'isSeller'])
 
             <div class="d-flex align-items-center my-3">
-                <a href="/" style="text-decoration:none;" class="text-light" type="button">
+                <a href="/payments" style="text-decoration:none;" class="text-light" type="button">
                     <i class="bi bi-wallet"></i>
                 </a>
             </div>
