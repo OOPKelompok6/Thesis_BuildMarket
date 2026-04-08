@@ -11,7 +11,7 @@ class Approval extends Model
     protected function casts(): array
     {
         return [
-            'npwp_number' => 'hashed'
+            'npwp_number' => 'encrypted'
         ];
     }
 

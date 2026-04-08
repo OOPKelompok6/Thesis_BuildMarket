@@ -41,7 +41,7 @@
             </div>
             
             <div class="d-flex align-items-center my-3">
-                <a href="/" style="text-decoration:none;" class="text-light" type="button">
+                <a href="/approvalList" style="text-decoration:none;" class="text-light" type="button">
                     <i class="bi bi-envelope"></i>
                 </a>
             </div>

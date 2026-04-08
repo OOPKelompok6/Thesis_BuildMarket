@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class);
             $table->string('npwp_number');
-            $table->string('blob_link');
+            $table->text('blob_link')->nullable(true);
             $table->timestamps();
         });
     }
