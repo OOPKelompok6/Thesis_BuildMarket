@@ -63,7 +63,7 @@ class PaymentController extends Controller
     }
 
     public function editPayment(Payment $payment) {
-        if (Gate::allows('isUser') || Gate::allows('isSeller')) {
+        if ((Gate::allows('isUser') || Gate::allows('isSeller')) && (Gate::allows('canEdit', $payment))){
             return view('Payments.PaymentUpdate', ['user' => Auth::user(), 
                         'vendors' => ['Visa', 'Discover', 'MasterCard', 'American Express', 'JCB'],
                         'payment' => $payment]);

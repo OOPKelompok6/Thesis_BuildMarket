@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApprovalsController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -27,3 +28,10 @@ Route::put('/payments', [PaymentController::class, 'createPayment'])->middleware
 Route::delete('/payments/{payment}', [PaymentController::class, 'deletePayment'])->middleware('auth');
 Route::get('/editPayment/{payment}', [PaymentController::class, 'editPayment'])->middleware('auth');
 Route::patch('/payments/{payment}', [PaymentController::class, 'updatePayment'])->middleware('auth');
+
+//approval groupings
+Route::get('/sellerRequest', [ApprovalsController::class, 'userApproval'])->middleware('auth');
+Route::post('/sellerRequest', [ApprovalsController::class, 'createApproval'])->middleware('auth');
+Route::get('/approvalList', [ApprovalsController::class, 'approvalList'])->middleware('auth');
+Route::post('/approvalList/{approval}', [ApprovalsController::class, 'approveApproval'])->middleware('auth');
+Route::delete('/approvalList/{approval}', [ApprovalsController::class, 'deleteApproval'])->middleware('auth');
