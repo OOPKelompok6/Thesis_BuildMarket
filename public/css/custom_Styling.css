@@ -1,3 +1,16 @@
 .offcanvas-custom-width {
-  width: 4% !important; /* Set your desired width */
+  width: 4% !important;
+}
+
+.font-xSmall {
+  font-size: 0.8rem !important; 
+}
+
+.hr-custom {
+    color: rgb(248 249 250) !important;
+    opacity: 1 !important;
+}
+
+.btn-fix-width {
+  width: 20% !important;
 }

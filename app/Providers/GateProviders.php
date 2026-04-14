@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class GateProviders extends ServiceProvider
@@ -34,5 +35,13 @@ class GateProviders extends ServiceProvider
             return $user->role === 'Seller';
         });
         //Role checkers --end
+
+        //checking route
+        Gate::define('isOurItemScreen', function (User $user) {
+            if(str_contains(Route::current()->uri(), '/ourItems')) {
+                return true;
+            }
+            return false;
+        });
     }
 }
