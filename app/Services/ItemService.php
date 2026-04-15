@@ -6,7 +6,7 @@ namespace App\Services;
 use App\Models\Brand;
 use App\Models\Item;
 
-class HomeService
+class ItemService
 {
 
     public function getBrands()
@@ -16,6 +16,6 @@ class HomeService
 
     public function getNewProducts()
     {
-        return Item::latest()->take(9)->get();
+        return Item::with('category')->latest()->take(9)->get();
     }
 }
