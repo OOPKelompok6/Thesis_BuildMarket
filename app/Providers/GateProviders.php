@@ -33,6 +33,10 @@ class GateProviders extends ServiceProvider
         Gate::define('isSeller', function (User $user) {
             return $user->role === 'Seller';
         });
+
+        Gate::define('isSeller', function (User $user) {
+            return $user->role === 'Seller';
+        });
         //Role checkers --end
     }
 }
