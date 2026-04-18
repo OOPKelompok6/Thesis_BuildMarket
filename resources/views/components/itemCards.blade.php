@@ -43,7 +43,7 @@
                             </a>
                         @endcan
 
-                        <a href="/products/{{ $product->slug }}" class="mt-auto"
+                        <a href="/item/{{ $product->slug }}" class="mt-auto"
                             style="font-size: 0.75rem; color: #e50808; text-decoration: none;">
                             Delete Item &rsaquo;
                         </a>

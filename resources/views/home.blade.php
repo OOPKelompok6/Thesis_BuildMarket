@@ -2,7 +2,7 @@
     <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
                 <div class="carousel-item active">
-                        <a href="/browseItem?category=Tools%20&%20Hardware">
+                        <a href="/browseItem?category=Tools%20%26%20Hardware">
                         <img src="{{ secure_asset('images/tools_showcase.png') }}" class="d-block w-100" alt="ToolsShowcase"
                             style="height: 280px; object-fit: cover;">
                         </a>
@@ -67,7 +67,7 @@
     <div class="d-flex flex-column mx-4 mt-4">
         <div class="d-flex flex-row align-items-center border-bottom border-secondary pb-2 mb-3">
             <p class="text-light fw-bold mb-0">New Item Postings</p>
-            <a href="/products?ordering=created_date-newest" class="ms-auto text-secondary" style="text-decoration: none; font-size: 0.8rem;">
+            <a href="/browseItem?ordering=created_date-newest" class="ms-auto text-secondary" style="text-decoration: none; font-size: 0.8rem;">
                 View all
             </a>
         </div>

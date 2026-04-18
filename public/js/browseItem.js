@@ -10,7 +10,7 @@ function populateSearchForm(params) {
         document.getElementById("sellerNameInput").value = params.sellerName;
     }
 
-    if(params.category !== undefined) {
+    if(decodeURIComponent(params.category) !== undefined) {
         document.getElementById("categorySelect").value = params.category;
     }
 
@@ -173,7 +173,7 @@ function createCard(item) {
 
     var viewItemTag = document.createElement("a");
     viewItemTag.setAttribute("class", "mt-auto");
-    viewItemTag.setAttribute("href", `/products/${item.id}`);
+    viewItemTag.setAttribute("href", `/item/${item.id}`);
     viewItemTag.setAttribute("style", "font-size: 0.75rem; color: #aaa; text-decoration: none;");
     viewItemTag.innerHTML = "View item \u203A";
     itemDescContainer.appendChild(viewItemTag);
