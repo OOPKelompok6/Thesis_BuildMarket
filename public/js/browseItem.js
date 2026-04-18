@@ -76,18 +76,24 @@ function builtPagination(pageSpecs) {
     idPagination.setAttribute("class", "pagination pagination-sm");
     container.appendChild(idPagination);
 
-    for(; startInd <= endInd; startInd++) {
+    for(let i = startInd; i <= endInd; i++) {
         var itemList =  document.createElement("li");
         itemList.setAttribute("class", `page-item ${(pageSpecs.links[startInd].active) ? " active": ""}`);
 
         var actBtn = document.createElement("button");
         actBtn.setAttribute("class", "page-link");
 
+        //Let vs var scoping new insight quite useful
+        //https://stackoverflow.com/questions/59170277
+        // /javascript-understanding-let-scope-inside-for-loop#:~:text=Special%20Case%20When%20Modifying%20the,of%20i%20in%20the%20loop.
+        //in any case The callback stores reference to the variable thats why the previous commit fail 
+        //it was fixed by the double assignment somehow so bug no bug!
         actBtn.addEventListener("click", (event) => {
-            fetchItemData(`${pageSpecs.links[startInd].url}`);
+            fetchItemData(`${pageSpecs.links[i].url}`);
         });
 
         actBtn.innerHTML = pageSpecs.links[startInd].page;
+        startInd++;
         itemList.appendChild(actBtn);
 
         idPagination.appendChild(itemList);
