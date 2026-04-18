@@ -84,7 +84,7 @@ function builtPagination(pageSpecs) {
         actBtn.setAttribute("class", "page-link");
 
         actBtn.addEventListener("click", (event) => {
-            fetchItemData("${pageSpecs.links[startInd].url}");
+            fetchItemData(`${pageSpecs.links[startInd].url}`);
         });
 
         actBtn.innerHTML = pageSpecs.links[startInd].page;
