@@ -28,7 +28,7 @@
 
         <p class="text-light fw-bold mb-1" style="font-size: 0.8rem;">{{ "Rp " . number_format($product->price, 0, ',', '.') }}</p>
         <div class="d-flex flex-row gap-5 mt-2">
-            <a href="/products/{{ $product->slug }}" class="mt-auto"
+            <a href="/item/{{ $product->slug }}" class="mt-auto"
                 style="font-size: 0.75rem; color: #aaa; text-decoration: none;">
                 View Item &rsaquo;
             </a>
@@ -37,7 +37,7 @@
                 @canany(['isSeller', 'isAdmin'])
                     @if (request()->is('/ownItems'))
                         @can('isSeller')
-                            <a href="/products/{{ $product->slug }}" class="mt-auto"
+                            <a href="/item/{{ $product->slug }}" class="mt-auto"
                                 style="font-size: 0.75rem; color: #0a11e5; text-decoration: none;">
                                 Edit Item &rsaquo;
                             </a>
