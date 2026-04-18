@@ -2,26 +2,26 @@
     <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
                 <div class="carousel-item active">
-                        <a>
+                        <a href="/browseItem?category=Tools%20&%20Hardware">
                         <img src="{{ secure_asset('images/tools_showcase.png') }}" class="d-block w-100" alt="ToolsShowcase"
                             style="height: 280px; object-fit: cover;">
                         </a>
                 </div>
                 <div class="carousel-item">
-                        <a>
+                        <a href="/browseItem?category=Flooring">
                         <img src="{{ secure_asset('images/flooring_showcase.png') }}" class="d-block w-100" alt="ToolsShowcase"
                             style="height: 280px; object-fit: cover;">
                         </a>
                 </div>
                 <div class="carousel-item">
-                        <a>
+                        <a href="/browseItem?category=Sanitary%20and%20bathroom">
                         <img src="{{ secure_asset('images/bathroom_appliances.png') }}" class="d-block w-100" alt="ToolsShowcase"
                             style="height: 280px; object-fit: cover;">
                         </a>
                 </div>
                 <div class="carousel-item">
-                        <a>
-                        <img src="{{ secure_asset('images/paint_appliances.png') }}" class="d-block w-100" alt="ToolsShowcase"
+                        <a href="/browseItem?category=Plumbing">
+                        <img src="{{ secure_asset('images/plumbing_appliances.png') }}" class="d-block w-100" alt="ToolsShowcase"
                             style="height: 280px; object-fit: cover;">
                         </a>
                 </div>
@@ -42,23 +42,23 @@
         </div>
 
         <div class="d-flex my-3 w-100">
-            <a style="width: 20vw;" class="btn d-flex bg-light mx-1 rounded-3" href="/browseItem">
+            <a style="width: 20vw;" class="btn d-flex bg-light mx-1 rounded-3" href="/browseItem?brand=DeWalt">
                 <img class="img-fluid mx-auto my-auto" src="{{ secure_asset('images/brands/dewalt.png') }}">
             </a>
 
-            <a style="width: 20vw;" class="btn d-flex bg-light mx-1 rounded-3" href="/browseItem">
+            <a style="width: 20vw;" class="btn d-flex bg-light mx-1 rounded-3" href="/browseItem?brand=Bosch">
                 <img class="img-fluid mx-auto my-auto" src="{{ secure_asset('images/brands/bosch.png') }}">
             </a>
 
-            <a style="width: 20vw;" class="btn d-flex bg-light mx-1 rounded-3" href="/browseItem">
+            <a style="width: 20vw;" class="btn d-flex bg-light mx-1 rounded-3" href="/browseItem?brand=Makita">
                 <img class="img-fluid mx-auto my-auto" src="{{ secure_asset('images/brands/makita.png') }}">
             </a>
 
-            <a style="width: 20vw;" class="btn d-flex bg-light mx-1 rounded-3" href="/browseItem">
+            <a style="width: 20vw;" class="btn d-flex bg-light mx-1 rounded-3" href="/browseItem?brand=Milwaukee">
                 <img class="img-fluid mx-auto my-auto" src="{{ secure_asset('images/brands/milwaukee.png') }}">
             </a>
 
-            <a style="width: 20vw;" class="btn d-flex bg-light mx-1 rounded-3" href="/browseItem">
+            <a style="width: 20vw;" class="btn d-flex bg-light mx-1 rounded-3" href="/browseItem?brand=Tiga%20roda">
                 <img class="img-fluid mx-auto my-auto" src="{{ secure_asset('images/brands/tigaRoda.png') }}">
             </a>
         </div>
@@ -67,7 +67,7 @@
     <div class="d-flex flex-column mx-4 mt-4">
         <div class="d-flex flex-row align-items-center border-bottom border-secondary pb-2 mb-3">
             <p class="text-light fw-bold mb-0">New Item Postings</p>
-            <a href="/products?sort=newest" class="ms-auto text-secondary" style="text-decoration: none; font-size: 0.8rem;">
+            <a href="/products?ordering=created_date-newest" class="ms-auto text-secondary" style="text-decoration: none; font-size: 0.8rem;">
                 View all
             </a>
         </div>
