@@ -16,7 +16,6 @@
         </div>
 
         <form class="d-flex mx-auto input-group ms-4 me-5 w-50">
-            {{-- Dont forget to redirect to category here --}}
             <input type="text" style="background-color: #141414; " class="text-light form-control search-input">
             <button type="submit" class="input-group-text" style="background-color: #141414; id="searchBar">
                 <i class="bi bi-search text-light"></i>
@@ -24,7 +23,7 @@
         </form>
 
         <div class="d-flex mx-3 align-items-center">
-            <a href="/" style="text-decoration:none;" class="text-light fs-6 fw-normal" href="#sideBar" type="button">
+            <a href="/browseItem" style="text-decoration:none;" class="text-light fs-6 fw-normal" href="#sideBar" type="button">
                 Category
             </a>
         </div>

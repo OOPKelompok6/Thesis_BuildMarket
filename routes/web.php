@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApprovalsController;
+use App\Http\Controllers\BrowseItemController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -34,3 +35,6 @@ Route::post('/sellerRequest', [ApprovalsController::class, 'createApproval'])->m
 Route::get('/approvalList', [ApprovalsController::class, 'approvalList'])->middleware('auth');
 Route::post('/approvalList/{approval}', [ApprovalsController::class, 'approveApproval'])->middleware('auth');
 Route::delete('/approvalList/{approval}', [ApprovalsController::class, 'deleteApproval'])->middleware('auth');
+
+//browseItem
+Route::get('/browseItem', [BrowseItemController::class, 'browseItem']);
