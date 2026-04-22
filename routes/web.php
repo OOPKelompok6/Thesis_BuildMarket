@@ -6,6 +6,7 @@ use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ItemDetailController;
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -36,5 +37,8 @@ Route::get('/approvalList', [ApprovalsController::class, 'approvalList'])->middl
 Route::post('/approvalList/{approval}', [ApprovalsController::class, 'approveApproval'])->middleware('auth');
 Route::delete('/approvalList/{approval}', [ApprovalsController::class, 'deleteApproval'])->middleware('auth');
 
-//browseItem
+//Item groupings
 Route::get('/browseItem', [BrowseItemController::class, 'browseItem']);
+Route::get('/item/{item}', [ItemDetailController::class, 'itemDetail']);
+Route::post('/postReview/{item}', [ItemDetailController::class, 'postReview']);
+

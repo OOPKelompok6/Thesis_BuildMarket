@@ -53,4 +53,8 @@ class User extends Authenticatable
     public function transaction_headers() {
         return $this->hasMany(Transaction_header::class);
     }
+
+    public function review() {
+        return $this->hasOne(Review::class);
+    }
 }
