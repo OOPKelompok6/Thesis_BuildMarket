@@ -22,12 +22,13 @@ class ItemService
 
     public function getNewProducts()
     {
-        return Item::with('category', 'brand')->latest()->take(9)->get();
+        return Item::with('category', 'brand')->where('quantity', '!=', 0)->latest()->take(9)->get();
     }
 
     public function getItems($params)
     {
         $query = Item::query();
+        $query->where('quantity', '!=', 0);
 
         if($params["name"] ?? null) {
             $query->where('name', 'like', '%' . $params["name"] . '%');
