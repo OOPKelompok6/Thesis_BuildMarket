@@ -69,4 +69,16 @@ class ItemService
 
         return $query->with('brand', 'category')->paginate(10)->withQueryString();;
     }
+
+
+    public function getSimilarItems($item)
+    {
+        return Item::with('category', 'brand')
+            ->where('category_id', $item->category_id)
+            ->where('id', '!=', $item->id)
+            ->where('quantity', '!=', 0)
+            ->latest()
+            ->take(6)
+            ->get();
+    }
 }
