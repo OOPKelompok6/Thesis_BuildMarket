@@ -183,7 +183,8 @@ function createCard(item) {
     var desc = document.createElement("p");
     desc.setAttribute("class", "text-secondary mb-1");
     desc.setAttribute("style", "font-size: 0.72rem; line-height: 1.4;");
-    desc.innerHTML = item.description.slice(0, 80) + "...";
+    desc.innerHTML = item.description;
+    desc.innerHTML = desc.textContent.slice(0, 80) + "...";
     itemDescContainer.appendChild(desc);
 
     var price = document.createElement("p");
