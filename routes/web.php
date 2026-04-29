@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemDetailController;
+use App\Http\Controllers\CartController;
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -42,3 +43,9 @@ Route::get('/browseItem', [BrowseItemController::class, 'browseItem']);
 Route::get('/item/{item}', [ItemDetailController::class, 'itemDetail']);
 Route::post('/postReview/{item}', [ItemDetailController::class, 'postReview']);
 
+
+// Cart groupings
+Route::get('/cart', [CartController::class, 'cart'])->middleware('auth');
+Route::post('/addToCart', [CartController::class, 'addToCart'])->middleware('auth');
+Route::post('/updateCart', [CartController::class, 'updateCart'])->middleware('auth');
+Route::delete('/cart/{cartItem}', [CartController::class, 'deleteCartItem'])->middleware('auth');
