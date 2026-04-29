@@ -23,7 +23,7 @@
         <p class="text-secondary mb-1" style="font-size: 0.72rem; line-height: 1.4;">{{ $product->category->name }}<span class="ms-3">{{ $product->brand->name }}</span></p>
         <p class="text-light fw-bold mb-1" style="font-size: 0.8rem;">{{ $product->name }}</p>
         <p class="text-secondary mb-1" style="font-size: 0.72rem; line-height: 1.4;">
-            {{ Str::limit($product->description, 80) }}
+            {{ Str::limit(clean($product->description, ['HTML.Allowed' => '']), 80) }}
         </p>
 
         <p class="text-light fw-bold mb-1" style="font-size: 0.8rem;">{{ "Rp " . number_format($product->price, 0, ',', '.') }}</p>

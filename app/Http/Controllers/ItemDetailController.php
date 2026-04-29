@@ -16,7 +16,7 @@ class ItemDetailController extends Controller
         $reviews = $this->reviewService->getReviews($item);
         $similarItems = $this->itemService->getSimilarItems($item);
 
-        return view('NewItemDetail', [
+        return view('itemDetail', [
             'item' => $item,
             'reviews' => $reviews,
             'similarItems' => $similarItems

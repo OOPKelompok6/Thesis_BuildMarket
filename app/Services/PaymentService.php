@@ -20,7 +20,6 @@ class PaymentService
 
     public function deletePayment($payment) {
         $payment->delete();
-        return redirect('/payments');
     }
 
     public function editPayment($payment, $paymentNew) {
