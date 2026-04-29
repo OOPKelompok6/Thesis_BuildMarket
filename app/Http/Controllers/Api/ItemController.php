@@ -15,4 +15,9 @@ class ItemController extends Controller
     {
         return response()->json($this->itemService->getItems(request()->query()), 200);
     }
+
+    public function getOwnItems()
+    {
+        return response()->json($this->itemService->getOwnItems(request()->query()), 200);
+    }
 }

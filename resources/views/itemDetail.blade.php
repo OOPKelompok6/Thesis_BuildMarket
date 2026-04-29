@@ -40,8 +40,8 @@
             <p class="text-light fw-bold mb-0">Description</p>
         </div>
 
-        <div class="d-flex my-3 w-100 text-light">
-            {{ $item->description }}
+        <div class="d-flex flex-column my-3 w-100 text-light">
+            {!! $item->description !!}
         </div>
     </div>
 

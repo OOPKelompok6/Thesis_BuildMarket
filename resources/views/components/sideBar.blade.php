@@ -20,7 +20,7 @@
             </div>
             @can('isSeller')
                 <div class="d-flex align-items-center my-3">
-                    <a href="/" style="text-decoration:none;" class="text-light" type="button">
+                    <a href="/itemManagement" style="text-decoration:none;" class="text-light" type="button">
                         <i class="bi bi-boxes"></i>
                     </a>
                 </div>
@@ -35,7 +35,7 @@
 
         @can('isAdmin')
             <div class="d-flex align-items-center my-3">
-                <a href="/" style="text-decoration:none;" class="text-light" type="button">
+                <a href="/itemManagement" style="text-decoration:none;" class="text-light" type="button">
                     <i class="bi bi-boxes"></i>
                 </a>
             </div>

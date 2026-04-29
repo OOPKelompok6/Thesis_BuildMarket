@@ -7,6 +7,9 @@ use App\Models\User;
 
 class UserService
 {
+    public function getCurrentUser() {
+        return Auth::user()->only(['id', 'firstName', 'lastName', 'role']);
+    }
 
     public function createUser($user) {
         $user = User::create($user);
