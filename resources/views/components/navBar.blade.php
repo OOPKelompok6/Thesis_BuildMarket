@@ -31,7 +31,7 @@
         @auth
             @canany(['isUser', 'isSeller'])
                 <div class="d-flex mx-5 align-items-center">
-                    <a href="/" style="text-decoration:none;" class="text-light fs-6 fw-normal" href="#sideBar" type="button">
+                    <a href="/cart" style="text-decoration:none;" class="text-light fs-6 fw-normal" href="#sideBar" type="button">
                         Cart
                     </a>
                 </div>

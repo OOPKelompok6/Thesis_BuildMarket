@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\UserController as UserApiController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemDetailController;
 use App\Http\Controllers\ItemManagementController;
+use App\Http\Controllers\CartController;
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -55,3 +56,11 @@ Route::get('/newItem', [ItemManagementController::class, 'newItem'])->name('newI
 Route::post('/newItem', [ItemManagementController::class, 'createItem'])->middleware('auth');
 Route::get('/editItem/{item}', [ItemManagementController::class, 'editItem'])->name('editItem')->middleware('auth');
 Route::post('/updateItem/{item}', [ItemManagementController::class, 'updateItem'])->middleware('auth');
+Route::post('/postReview/{item}', [ItemDetailController::class, 'postReview']);
+
+
+// Cart groupings
+Route::get('/cart', [CartController::class, 'cart'])->middleware('auth');
+Route::post('/addToCart', [CartController::class, 'addToCart'])->middleware('auth');
+Route::post('/updateCart', [CartController::class, 'updateCart'])->middleware('auth');
+Route::delete('/cart/{cartItem}', [CartController::class, 'deleteCartItem'])->middleware('auth');

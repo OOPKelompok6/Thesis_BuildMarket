@@ -13,7 +13,15 @@ class ItemDetailController extends Controller
     {}
 
     public function itemDetail(Item $item) {
-        return view('itemDetail', ['item' => $item, 'reviews' =>$this->reviewService->getReviews($item)]);
+        $reviews = $this->reviewService->getReviews($item);
+        $similarItems = $this->itemService->getSimilarItems($item);
+
+        return view('NewItemDetail', [
+            'item' => $item,
+            'reviews' => $reviews,
+            'similarItems' => $similarItems
+        ]);
+        // return view('itemDetail', ['item' => $item, 'reviews' =>$this->reviewService->getReviews($item)]);
     }
 
     public function postReview(Item $item) {
