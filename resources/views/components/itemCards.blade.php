@@ -1,8 +1,8 @@
 @props(['product', 'cardWidth', 'cartItem'])
 
 <div class="d-flex flex-row rounded-3 overflow-hidden"
-        style="background-color: #1e1e1e; border: 1px solid #2e2e2e; max-width: {{ $cardWidth ?? '33%' }};">
-    <div style="width: 80px; min-height: 100px; background-color: #2a2a2a; flex-shrink: 0;"
+        style="background-color: #ffffff; border: 1px solid #2e2e2e; max-width: {{ $cardWidth ?? '33%' }};">
+    <div style="width: 80px; min-height: 100px; background-color: #ffffff; flex-shrink: 0;"
         class="d-flex align-items-center justify-content-center">
             <img src="
             @if ($product->category->name == 'Sanitary and bathroom')
@@ -21,15 +21,15 @@
     </div>
     <div class="d-flex flex-column p-2">
         <p class="text-secondary mb-1" style="font-size: 0.72rem; line-height: 1.4;">{{ $product->category->name }}<span class="ms-3">{{ $product->brand->name }}</span></p>
-        <p class="text-light fw-bold mb-1" style="font-size: 0.8rem;">{{ $product->name }}</p>
+        <p class="text-dark fw-bold mb-1" style="font-size: 0.8rem;">{{ $product->name }}</p>
         <p class="text-secondary mb-1" style="font-size: 0.72rem; line-height: 1.4;">
             {{ Str::limit(clean($product->description, ['HTML.Allowed' => '']), 80) }}
         </p>
 
-        <p class="text-light fw-bold mb-1" style="font-size: 0.8rem;">{{ "Rp " . number_format($product->price, 0, ',', '.') }}</p>
+        <p class="text-dark fw-bold mb-1" style="font-size: 0.8rem;">{{ "Rp " . number_format($product->price, 0, ',', '.') }}</p>
         <div class="d-flex flex-row mt-2">
             <a href="/item/{{ $product->id }}" class="mt-auto me-5"
-                style="font-size: 0.75rem; color: #aaa; text-decoration: none;">
+                style="font-size: 0.75rem; color: #7a7a7a; text-decoration: none;">
                 View Item &rsaquo;
             </a>
 

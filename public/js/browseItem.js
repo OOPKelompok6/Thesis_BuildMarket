@@ -105,11 +105,11 @@ function builtPagination(pageSpecs) {
 function createCard(item) {
     var cardOuter = document.createElement("div");
     cardOuter.setAttribute("class", "d-flex flex-row rounded-3 overflow-hidden");
-    cardOuter.setAttribute("style", "background-color: #1e1e1e; border: 1px solid #2e2e2e; max-width: 50%;");
+    cardOuter.setAttribute("style", "background-color: #ffffff; border: 1px solid #2e2e2e; max-width: 50%;");
     
     var imageContainer = document.createElement("div");
     imageContainer.setAttribute("class", "d-flex align-items-center justify-content-center");
-    imageContainer.setAttribute("style", "width: 80px; min-height: 100px; background-color: #2a2a2a; flex-shrink: 0;");
+    imageContainer.setAttribute("style", "width: 80px; min-height: 100px; background-color: #ffffff; flex-shrink: 0;");
     cardOuter.appendChild(imageContainer);
 
     var image = document.createElement("img");
@@ -149,7 +149,7 @@ function createCard(item) {
     itemDescContainer.appendChild(descInfo);
 
     var title = document.createElement("p");
-    title.setAttribute("class", "text-light fw-bold mb-1");
+    title.setAttribute("class", "text-dark fw-bold mb-1");
     title.setAttribute("style", "font-size: 0.8rem;");
     title.innerHTML = item.name;
     itemDescContainer.appendChild(title);
@@ -162,7 +162,7 @@ function createCard(item) {
     itemDescContainer.appendChild(desc);
 
     var price = document.createElement("p");
-    price.setAttribute("class", "text-light fw-bold mb-1");
+    price.setAttribute("class", "text-dark fw-bold mb-1");
     price.setAttribute("style", "font-size: 0.8rem;");
 
     const idrFormatter = new Intl.NumberFormat('id-ID', {
@@ -175,7 +175,7 @@ function createCard(item) {
     var viewItemTag = document.createElement("a");
     viewItemTag.setAttribute("class", "mt-auto");
     viewItemTag.setAttribute("href", `/item/${item.id}`);
-    viewItemTag.setAttribute("style", "font-size: 0.75rem; color: #aaa; text-decoration: none;");
+    viewItemTag.setAttribute("style", "font-size: 0.75rem; color: #7a7a7a; text-decoration: none;");
     viewItemTag.innerHTML = "View item \u203A";
     itemDescContainer.appendChild(viewItemTag);
 
