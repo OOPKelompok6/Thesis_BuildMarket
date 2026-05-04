@@ -1,4 +1,4 @@
-@props(['product', 'cardWidth'])
+@props(['product', 'cardWidth', 'cartItem'])
 
 <div class="d-flex flex-row rounded-3 overflow-hidden"
         style="background-color: #1e1e1e; border: 1px solid #2e2e2e; max-width: {{ $cardWidth ?? '33%' }};">
@@ -27,28 +27,28 @@
         </p>
 
         <p class="text-light fw-bold mb-1" style="font-size: 0.8rem;">{{ "Rp " . number_format($product->price, 0, ',', '.') }}</p>
-        <div class="d-flex flex-row gap-5 mt-2">
-            <a href="/item/{{ $product->id }}" class="mt-auto"
+        <div class="d-flex flex-row mt-2">
+            <a href="/item/{{ $product->id }}" class="mt-auto me-5"
                 style="font-size: 0.75rem; color: #aaa; text-decoration: none;">
                 View Item &rsaquo;
             </a>
 
             @auth
-                @canany(['isSeller', 'isAdmin'])
-                    @if (request()->is('/ownItems'))
-                        @can('isSeller')
-                            <a href="/item/{{ $product->id }}" class="mt-auto"
-                                style="font-size: 0.75rem; color: #0a11e5; text-decoration: none;">
-                                Edit Item &rsaquo;
-                            </a>
-                        @endcan
+                @if (request()->routeIs('cart'))
+                    @canany(['isSeller', 'isUser'])
+                    
+                        <input name="quantities[]" id="quantInput-{{ $cartItem->id }}" type="number" value="{{ $cartItem->quantity }}" min="1" max="{{ $product->quantity }}" class="form-control mt-auto me-1" style="width: 20%; height: 70%;">
+                        <input class="d-none" name="indexes[]" type="number" value="{{ $cartItem->id }}">
+                        <button id="buttonQuantInput-{{ $cartItem->id }}" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" class="bg-primary btn btn-sm mt-auto upd-btn" style="font-size: 0.8rem; height: 70%; width: 10%">
+                            <i class="bi bi-upload"></i>
+                        </button>
 
-                        <a href="/item/{{ $product->id }}" class="mt-auto"
-                            style="font-size: 0.75rem; color: #e50808; text-decoration: none;">
+                        <button id="dltIdentifier-{{ $cartItem->id }}" type="button" class="mt-auto ms-4 dlt-btn" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                            style="font-size: 0.75rem; color: #e50808; text-decoration: none;  background: none; border: none;">
                             Delete Item &rsaquo;
-                        </a>
-                    @endif
-                @endcan
+                        </button>
+                    @endcan
+                @endif
             @endauth
         </div>
     </div>
