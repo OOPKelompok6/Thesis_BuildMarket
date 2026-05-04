@@ -22,7 +22,7 @@ class paymentFactory extends Factory
         return [
             'vendor' => fake()->randomElement($this->creditCardVendors),
             'expiration_Date' => fake()->creditCardExpirationDate(),
-            'cardNumber' => Crypt::encrypt(fake()->unique()->creditCardNumber()),
+            'cardNumber' => fake()->numberBetween(1000000000000000, 9999999999999999),
             'billingAddress' => fake()->address()
         ];
     }

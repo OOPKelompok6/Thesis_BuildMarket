@@ -9,7 +9,19 @@ class CartService
 {
     public function getCartItems()
     {
-        return Cart_item::with('item')->where('user_id', Auth::user()->id)->get();
+        return Cart_item::with('item')->where('user_id', Auth::user()->id)->paginate(10);
+    }
+
+    public function getTotalPrice()
+    {
+        $cartItems = Cart_item::with('item')->where('user_id', Auth::user()->id)->get();
+        $total = 0;
+
+        foreach($cartItems as $cartItem) {
+            $total += $cartItem->item->price * $cartItem->quantity;
+        }
+
+        return $total;
     }
 
     public function addToCart($payload)
@@ -21,18 +33,19 @@ class CartService
         ]);
     }
 
-    public function updateCart($payload)
+    public function updateCart($cartItem, $quantity)
     {
-        $cartItem = Cart_item::where('user_id', Auth::user()->id)
-            ->where('item_id', $payload['itemId'])
-            ->first();
-
-        $cartItem->quantity = $payload['quantity'];
+        $cartItem->quantity = $quantity;
         $cartItem->save();
     }
 
     public function deleteCartItem($cartItem)
     {
         $cartItem->delete();
+    }
+
+    public function clearCartItem()
+    {
+        Cart_item::where('user_id', Auth::user()->id)->delete();
     }
 }

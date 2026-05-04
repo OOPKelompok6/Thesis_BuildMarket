@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Transaction_header::class);
             $table->foreignIdFor(Item::class);
+            $table->integer('quantity');
+            $table->timestamps();
         });
     }
 

@@ -60,7 +60,8 @@ Route::post('/postReview/{item}', [ItemDetailController::class, 'postReview']);
 
 
 // Cart groupings
-Route::get('/cart', [CartController::class, 'cart'])->middleware('auth');
+Route::get('/cart', [CartController::class, 'cart'])->name('cart')->middleware('auth');
 Route::post('/addToCart', [CartController::class, 'addToCart'])->middleware('auth');
-Route::post('/updateCart', [CartController::class, 'updateCart'])->middleware('auth');
+Route::post('/cart/{cartItem}', [CartController::class, 'updateCart'])->middleware('auth');
 Route::delete('/cart/{cartItem}', [CartController::class, 'deleteCartItem'])->middleware('auth');
+Route::post('/completeTransaction', [CartController::class, 'buyItems'])->middleware('auth');

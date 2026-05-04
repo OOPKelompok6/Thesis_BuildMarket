@@ -1,3 +1,11 @@
 .offcanvas-custom-width {
   width: 4% !important; /* Set your desired width */
 }
+
+.w-28 {
+  width: 28% !important; /* Set your desired width */
+}
+
+.w-72 {
+  width: 72% !important; /* Set your desired width */
+}

@@ -4,6 +4,7 @@ namespace App\Services;
 
 
 use App\Models\Brand;
+use App\Models\Cart_item;
 use App\Models\Category;
 use App\Models\Item;
 use Illuminate\Support\Facades\Auth;
@@ -73,6 +74,7 @@ class ItemService
     }
 
     public function deleteItem($item) {
+        Cart_item::where('item_id', $item->id)->delete();
         $item->delete();
     }
 

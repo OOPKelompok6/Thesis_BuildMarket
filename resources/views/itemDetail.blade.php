@@ -5,7 +5,7 @@
         {{-- Item Image --}}
         <div class="d-flex flex-column" style="width: 260px; flex-shrink: 0;">
             <div class="d-flex align-items-center justify-content-center rounded-3 overflow-hidden"
-                style="width: 260px; height: 260px; background-colorå: #1e1e1e; border: 1px solid #2e2e2e;">
+                style="width: 260px; height: 260px; background-color: #1e1e1e; border: 1px solid #2e2e2e;">
                 <img src="
                 @if ($item->category->name == 'Sanitary and bathroom')
                     {{ secure_asset('images/cards/bathroom_thumbnail.png') }}
@@ -41,7 +41,7 @@
                 <div class="bg-light d-flex flex-column rounded-3 p-3">
                     <label for="quantInput" class="fw-bold fs-5 mb-2">Quantity</label>
 
-                    <form method="POST" action="@can('isOnCart', $item){{ '/updateCart' }}@else{{ '/addToCart' }}@endcan">
+                    <form method="POST" action="@can('isOnCart', $item){{ '/cart/' . $item->cart_items->where('user_id', Auth::user()->id)->first()->id }}@else{{ '/addToCart' }}@endcan">
                         @csrf
                         <input type="hidden" name="itemId" value="{{ $item->id }}">
 

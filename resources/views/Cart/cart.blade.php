@@ -1,76 +1,104 @@
-<x-layout>
+<x-layout :customScript="[secure_asset('js/cart.js')]" deffered="true">
     <div class="d-flex flex-column mx-4 mt-4">
 
         <div class="d-flex flex-row border-bottom border-secondary pb-2 mb-3">
             <p class="text-light fw-bold mb-0">My Cart</p>
         </div>
 
-        @forelse($cartItems as $cartItem)
-            <div class="d-flex flex-row align-items-center rounded-3 mb-3 p-3"
-                style="background-color: #1e1e1e; border: 1px solid #2e2e2e;">
+        <form id="cartForm" method="POST" action="/completeTransaction" class="d-flex flex-row w-100">
+            @csrf
 
-                {{-- Item Image --}}
-                <div class="d-flex align-items-center justify-content-center rounded-3 overflow-hidden me-3"
-                    style="width: 80px; height: 80px; background-color: #2a2a2a; flex-shrink: 0;">
-                    @if($cartItem->item->image_url)
-                        <img src="{{ asset($cartItem->item->image_url) }}" alt="{{ $cartItem->item->name }}"
-                            style="width: 100%; height: 100%; object-fit: cover;">
-                    @else
-                        <span class="text-secondary" style="font-size: 0.7rem;">No Image</span>
+            <div class="d-flex flex-column w-28">
+                <div class="bg-light rounded-3 mx-3 my-5 w-100">
+                    <p class="text-dark fs-4 fw-bold ms-2 my-2">Payments</p>
+                    
+                    <div id="carouselExample" class="carousel slide my-4">
+                        <div class="carousel-inner">
+                            @foreach ($payments ?? [] as $index => $payment)
+                                <div class="carousel-item @if($index === 0) active @endif">
+                                    <label style="cursor: pointer;" class="d-flex flex-column flex-grow-1 mx-5 rounded-3 border border-1" for="payment-{{ $payment->id }}">
+                                        <input class="d-none" id="payment-{{ $payment->id }}" type="radio" value="{{ $payment->id }}" name="payment_id"/>
+                                            <div class="mx-2 my-1">
+                                                <p class="fs-6 fw-bold my-0">{{ $payment->vendor }}</p>
+                                                <p class="my-0" style="font-size: 0.8rem;">{{ $payment->cardNumber }}</p>
+                                                <p class="my-0" style="font-size: 0.8rem;">{{ $payment->billingAddress }}</p>
+                                                <p class="my-0" style="font-size: 0.8rem; opacity: 80%;">{{ $payment->expiration_Date }}</p>
+                                            </div>
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+
+                    <div class="d-flex flex-column w-100 align-items-center">
+                        {{ $cartItems->links() }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column w-72">
+                @forelse($cartItems ?? [] as $index => $cartItem)
+                    @if($index % 2 === 0)
+                        <div class="d-flex flex-row-reverse gap-2 mb-5">
                     @endif
-                </div>
 
-                {{-- Item Info --}}
-                <div class="d-flex flex-column me-auto">
-                    <a href="/item/{{ $cartItem->item->id }}" class="text-light fw-bold mb-1"
-                        style="font-size: 0.9rem; text-decoration: none;">
-                        {{ $cartItem->item->name }}
-                    </a>
-                    <p class="text-secondary mb-0" style="font-size: 0.8rem;">
-                        {{ $cartItem->item->brand->name }} · {{ $cartItem->item->category->name }}
-                    </p>
-                    <p class="text-light mb-0" style="font-size: 0.85rem;">
-                        {{ "Rp " . number_format($cartItem->item->price, 0, ',', '.') }}
-                    </p>
-                </div>
+                    <x-itemCards :product="$cartItem->item" :cartItem="$cartItem" cardWidth="48%"></x-itemCards>
 
-                {{-- Quantity & Subtotal --}}
-                <div class="d-flex flex-column align-items-end gap-2">
-                    <p class="text-light fw-bold mb-0" style="font-size: 0.85rem;">
-                        Qty: {{ $cartItem->quantity }}
-                    </p>
-                    <p class="text-light fw-bold mb-0" style="font-size: 0.9rem;">
-                        {{ "Rp " . number_format($cartItem->item->price * $cartItem->quantity, 0, ',', '.') }}
-                    </p>
-
-                    {{-- Delete --}}
-                    <form method="POST" action="/cart/{{ $cartItem->id }}">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-outline-danger">Remove</button>
-                    </form>
-                </div>
-
+                    @if($index % 2 === 1 || $index === count($cartItems) - 1)
+                        </div>
+                    @endif
+                @empty
+                    <div class="d-flex flex-column align-items-center justify-content-center mt-5">
+                        <p class="text-secondary">Your cart is empty.</p>
+                        <a href="/browseItem" class="btn btn-outline-light btn-sm mt-2">Browse Items</a>
+                    </div>
+                @endforelse
             </div>
-        @empty
-            <div class="d-flex flex-column align-items-center justify-content-center mt-5">
-                <p class="text-secondary">Your cart is empty.</p>
-                <a href="/browseItem" class="btn btn-outline-light btn-sm mt-2">Browse Items</a>
-            </div>
-        @endforelse
+        </form>
 
         {{-- Total --}}
         @if(count($cartItems) > 0)
             <div class="d-flex flex-row justify-content-end mt-3 border-top border-secondary pt-3">
                 <div class="d-flex flex-column align-items-end">
                     <p class="text-light fw-bold fs-5 mb-3">
-                        Total: {{ "Rp " . number_format($cartItems->sum(fn($c) => $c->item->price * $c->quantity), 0, ',', '.') }}
+                        Total: {{ "Rp " . number_format($totalPrice, 0, ',', '.') }}
                     </p>
-                    <a href="/checkout" class="btn btn-primary text-light px-4">Checkout</a>
+                    <button id="checkoutBtn" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-primary text-light px-4">Checkout</button>
                 </div>
             </div>
         @endif
+    </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+        <form id="deleteForm" class="d-none" method="POST">@csrf @method('DELETE')</form>
+        <form id="updateForm" class="d-none" method="POST">
+            @csrf
+            <input id="updateFinInput" name="quantity" type="number" min="1" class="d-none">
+        </form>
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteModalLabel">Confirm Deletion</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="modalContent" class="modal-body">
+                Are you sure you want to delete this item?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                <button id="sbmtBtn" type="submit" class="btn btn-danger">Delete</button>
+            </div>
+            </div>
+        </div>
     </div>
 
     <div class="mt-5"></div>
