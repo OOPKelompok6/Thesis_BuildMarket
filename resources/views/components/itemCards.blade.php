@@ -48,6 +48,11 @@
                             Delete Item &rsaquo;
                         </button>
                     @endcan
+
+                @elseif(request()->routeIs('transactionInvDetail'))
+                    @canany(['isSeller', 'isUser'])
+                        <p style="font-size: 0.8rem;" class="my-0">Quantity: {{$cartItem->quantity}}</p>
+                    @endcan
                 @endif
             @endauth
         </div>
