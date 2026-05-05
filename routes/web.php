@@ -11,6 +11,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemDetailController;
 use App\Http\Controllers\ItemManagementController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\TransactionController;
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -65,3 +66,7 @@ Route::post('/addToCart', [CartController::class, 'addToCart'])->middleware('aut
 Route::post('/cart/{cartItem}', [CartController::class, 'updateCart'])->middleware('auth');
 Route::delete('/cart/{cartItem}', [CartController::class, 'deleteCartItem'])->middleware('auth');
 Route::post('/completeTransaction', [CartController::class, 'buyItems'])->middleware('auth');
+
+//Transaction Groupings
+Route::get('/transactions', [TransactionController::class, 'transactions'])->middleware('auth');
+Route::get('/transactionDetail/{transaction_header}', [TransactionController::class, 'transactionDetails'])->name('transactionInvDetail')->middleware('auth');

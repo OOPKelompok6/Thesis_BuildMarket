@@ -15,9 +15,9 @@
             </a>
         </div>
 
-        <form class="d-flex mx-auto input-group ms-4 me-5 w-50">
-            <input type="text" style="background-color: #141414; " class="text-light form-control search-input">
-            <button type="submit" class="input-group-text" style="background-color: #141414; id="searchBar">
+        <form action="/browseItem" class="d-flex mx-auto input-group ms-4 me-5 w-50">
+            <input name="name" type="text" style="background-color: #141414; " class="text-light form-control search-input">
+            <button type="submit" class="input-group-text" style="background-color: #141414;" id="searchBar">
                 <i class="bi bi-search text-light"></i>
             </button>
         </form>

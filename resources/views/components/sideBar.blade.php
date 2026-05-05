@@ -27,7 +27,7 @@
             @endcan
 
             <div class="d-flex align-items-center my-3">
-                <a href="/" style="text-decoration:none;" class="text-light" type="button">
+                <a href="/transactions" style="text-decoration:none;" class="text-light" type="button">
                     <i class="bi bi-columns-gap"></i>
                 </a>
             </div>
