@@ -58,6 +58,24 @@ document.addEventListener("DOMContentLoaded", () => {
         let sbmtBtn = document.getElementById('sbmtBtn');
 
         sbmtBtn.setAttribute('form', `cartForm`);
+        document.getElementById('cartForm').setAttribute('action', `/completeTransaction`);
+
+        sbmtBtn.setAttribute('class', `btn btn-primary`);
+        sbmtBtn.innerHTML = 'Submit';
+
+        let headerText = document.getElementById(`deleteModalLabel`);
+        let contentText = document.getElementById('modalContent'); 
+
+        headerText.innerHTML = 'Confirm Checkout';
+        contentText.innerHTML = 'Are you sure you want to buy this item?';
+    });
+
+    document.getElementById(`checkoutBtnQRIS`).addEventListener('click', function() {
+        
+        let sbmtBtn = document.getElementById('sbmtBtn');
+
+        sbmtBtn.setAttribute('form', `cartForm`);
+        document.getElementById('cartForm').setAttribute('action', `/completeTransactionOther`);
 
         sbmtBtn.setAttribute('class', `btn btn-primary`);
         sbmtBtn.innerHTML = 'Submit';

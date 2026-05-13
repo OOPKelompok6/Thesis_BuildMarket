@@ -44,8 +44,8 @@ class CartService
         $cartItem->delete();
     }
 
-    public function clearCartItem()
+    public function clearCartItem($user_id)
     {
-        Cart_item::where('user_id', Auth::user()->id)->delete();
+        Cart_item::where('user_id', $user_id)->delete();
     }
 }

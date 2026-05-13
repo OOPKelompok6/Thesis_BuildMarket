@@ -72,7 +72,7 @@
                         Total: {{ "Rp " . number_format($totalPrice, 0, ',', '.') }}
                     </p>
                     <div class="gap-3 d-flex flex-row">
-                        <button id="checkoutBtnQRIS" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-primary text-light px-4">Checkout with QRIS <i class="bi bi-qr-code"></i></button>
+                        <button id="checkoutBtnQRIS" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-primary text-light px-4">Checkout With Other Methods</button>
                         <button id="checkoutBtn" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-primary text-light px-4">Checkout</button>
                     </div>
                 </div>
