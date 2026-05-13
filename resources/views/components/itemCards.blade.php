@@ -38,7 +38,7 @@
                     @canany(['isSeller', 'isUser'])
                     
                         <input name="quantities[]" id="quantInput-{{ $cartItem->id }}" type="number" value="{{ $cartItem->quantity }}" min="1" max="{{ $product->quantity }}" class="form-control mt-auto me-1" style="width: 20%; height: 70%;">
-                        <input class="d-none" name="indexes[]" type="number" value="{{ $cartItem->id }}">
+                        <input class="d-none" name="indexes[]" type="number" value="{{ $cartItem->item_id }}">
                         <button id="buttonQuantInput-{{ $cartItem->id }}" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" class="bg-primary btn btn-sm mt-auto upd-btn" style="font-size: 0.8rem; height: 70%; width: 10%">
                             <i class="bi bi-upload"></i>
                         </button>

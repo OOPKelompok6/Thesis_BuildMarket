@@ -6,7 +6,6 @@ use App\Models\Payment;
 use App\Services\PaymentService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-
 class PaymentController extends Controller
 {
 

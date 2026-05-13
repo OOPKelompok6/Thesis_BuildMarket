@@ -53,8 +53,16 @@ class CartController extends Controller
         ]);
     
         $payload = request()->only(['payment_id', 'quantities', 'indexes']);
+        $payload['user_id'] = Auth::user()->id;
+
         $this->transactionService->createTransaction($payload);
-        $this->cartService->clearCartItem();
+        $this->cartService->clearCartItem($payload['user_id']);
         return redirect('/cart');
+    }
+
+    public function buyItemsOtherMethods() {
+        $payload = request()->only(['quantities', 'indexes']);
+        $qrisURL = $this->transactionService->createOtherTransactionMethod($payload);
+        return redirect($qrisURL);
     }
 }
