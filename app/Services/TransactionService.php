@@ -95,7 +95,7 @@ class TransactionService
 
         //transaction details processing
         $tDetails = [];
-        $tDetails['order_id'] = (string)Auth::user()->id;
+        $tDetails['order_id'] = (string)Auth::user()->id . '-' . str()->random(5);
         $tDetails['gross_amount'] = $grossTotal;
 
         $finPayload['transaction_details'] = $tDetails;
