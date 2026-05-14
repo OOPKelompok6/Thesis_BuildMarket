@@ -57,7 +57,6 @@ Route::get('/newItem', [ItemManagementController::class, 'newItem'])->name('newI
 Route::post('/newItem', [ItemManagementController::class, 'createItem'])->middleware('auth');
 Route::get('/editItem/{item}', [ItemManagementController::class, 'editItem'])->name('editItem')->middleware('auth');
 Route::post('/updateItem/{item}', [ItemManagementController::class, 'updateItem'])->middleware('auth');
-Route::post('/postReview/{item}', [ItemDetailController::class, 'postReview']);
 
 
 // Cart groupings
