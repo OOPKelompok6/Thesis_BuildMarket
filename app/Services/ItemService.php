@@ -30,7 +30,7 @@ class ItemService
     public function getItems($params)
     {
         $query = Item::query();
-        $query->where('quantity', '!=', 0);
+        $query->where('quantity', '>', 0);
 
         if($params["name"] ?? null) {
             $query->where('name', 'like', '%' . $params["name"] . '%');
@@ -156,5 +156,22 @@ class ItemService
             ->latest()
             ->take(6)
             ->get();
+    }
+
+    public function updateItemStock($payload)
+    {
+        $items = Item::whereIn('id', $payload['indexes'])->get()->keyBy('id');
+
+        foreach($payload['indexes'] as $index => $item_id) {
+            $item =  $items[$item_id] ?? null;
+
+            if (!$item) {
+                continue;
+            }
+
+
+            $item->quantity = $item->quantity - $payload['quantities'][$index];
+            $item->save();
+        }
     }
 }

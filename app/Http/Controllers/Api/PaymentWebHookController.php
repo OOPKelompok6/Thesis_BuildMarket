@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Cart_item;
 use App\Services\CartService;
+use App\Services\ItemService;
 use App\Services\TransactionService;
 
 class PaymentWebHookController extends Controller
 {
-    public function __construct(protected TransactionService $transactionService, protected CartService $cartService)
+    public function __construct(protected TransactionService $transactionService, 
+        protected ItemService $itemService, protected CartService $cartService)
     {}
 
 
@@ -40,6 +42,7 @@ class PaymentWebHookController extends Controller
 
         $payload = $this->recreatePayload($user_id);
         $this->transactionService->createTransaction($payload);
+        $this->itemService->updateItemStock($payload);
         $this->cartService->clearCartItem($payload['user_id']);
 
         return response()->json([
