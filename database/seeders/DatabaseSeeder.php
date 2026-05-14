@@ -22,6 +22,13 @@ class DatabaseSeeder extends Seeder
         Brand::factory(15)->create();
         Category::factory(5)->create();
         User::factory(100)->create();
+        User::factory()->create([
+            'firstName' => 'admin',
+            'lastName' => 'admin',
+            'email' => 'akun_admin@gmail.com',
+            'role' => 'Admin',
+            'password' => env('ADMIN_PASSWORD') 
+        ]);
         Item::factory(200)->create(['brand_id' => 1, 'user_id' => 1, 'category_id' => 1]);
         Payment::factory(150)->create(['user_id' => 1]);
 
