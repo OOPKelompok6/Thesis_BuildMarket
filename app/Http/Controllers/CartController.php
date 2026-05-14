@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart_item;
 use Illuminate\Http\Request;
 use App\Services\CartService;
+use App\Services\ItemService;
 use App\Services\PaymentService;
 use App\Services\TransactionService;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     //
-     public function __construct(protected CartService $cartService, 
+     public function __construct(protected CartService $cartService, protected ItemService $itemService,
         protected PaymentService $paymentService, protected TransactionService $transactionService)
         {}
  
@@ -56,6 +57,7 @@ class CartController extends Controller
         $payload['user_id'] = Auth::user()->id;
 
         $this->transactionService->createTransaction($payload);
+        $this->itemService->updateItemStock($payload);
         $this->cartService->clearCartItem($payload['user_id']);
         return redirect('/cart');
     }
