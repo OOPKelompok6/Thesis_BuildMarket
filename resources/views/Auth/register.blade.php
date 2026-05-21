@@ -24,6 +24,7 @@
         <x-formTextFields class="w-75"
           message="Password" name="password" type="password" formId="passwordInput" innerClass="form-control bg-light">
         </x-formTextFields>
+        <p style="font-size: 0.8rem;"><i class="bi bi-question-circle"></i> Password have minimum of 7 characters and must contain letters and numbers</p>
         <x-errorValidationLabel name="password"></x-errorValidationLabel>
         <x-authShared.authButtons message="Register" type="submit"/>
         <x-authShared.accountConfirmText id="loginHelp" 
