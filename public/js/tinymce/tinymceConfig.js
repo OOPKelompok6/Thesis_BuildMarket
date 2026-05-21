@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
         license_key: 'gpl', 
         removed_menuitems: 'superscript subscript code',
         branding: false,
-        promotion: false
+        promotion: false,
+        invalid_elements: 'img'
     });
 });
