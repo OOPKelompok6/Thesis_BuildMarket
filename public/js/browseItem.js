@@ -26,7 +26,7 @@ function populateSearchForm(params) {
 
 async function fetchItemData(url) {
   var defaultUrl = new URL(window.location.href);
-  url ?? (url = `api/items${defaultUrl.search}`);
+  url ?? (url = `items${defaultUrl.search}`);
   url = new URL(url, window.location.origin);
 
   try {
@@ -253,6 +253,6 @@ document.addEventListener("DOMContentLoaded", () => {
         var queryParams = buildQueryParams();
         var queryUrl = new URLSearchParams(queryParams).toString();
 
-        fetchItemData(`api/items?${queryUrl}`);
+        fetchItemData(`items?${queryUrl}`);
     });
 });

@@ -38,6 +38,18 @@ class TransactionService
                         ->paginate(15);
     }
 
+    public function getSellerTotalItemData() {
+        return DB::table('items as i')
+                        ->join('transaction_details as td', 'td.item_id', '=', 'i.id')
+                        ->select(DB::raw('COALESCE(SUM(IFNULL(td.quantity, 0)), 0) as totalItemSold'), DB::raw('COALESCE(SUM(IFNULL(td.quantity, 0) * i.price), 0) as totalSold')) 
+                        ->where('i.user_id', Auth::user()->id)
+                        ->first();
+    }
+
+    public function getEmptyStockData() {
+        return Item::where('user_id', Auth::id())->where('isActive', true)->where('quantity', '=', 0)->count();
+    }
+
     public function getTotalPrice($id)
     {
         $items = Transaction_detail::with('item')->where('transaction_header_id', $id)->get();

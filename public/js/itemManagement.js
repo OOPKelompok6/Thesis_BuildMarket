@@ -11,6 +11,10 @@ function populateSearchForm(params) {
         document.getElementById("sellerNameInput").value = params.sellerName;
     }
 
+    if(params.emptyStock !== undefined) {
+        document.getElementById("emptyStockCheckbox").checked = true;
+    } 
+    
     if(decodeURIComponent(params.category) !== undefined) {
         document.getElementById("categorySelect").value = params.category;
     }
@@ -46,7 +50,7 @@ async function fetchItemData(url) {
   currentUser = await getCurrentUser();
 
   if(currentUser.role == 'Admin') {
-    ownItemsUrl = 'api/items';
+    ownItemsUrl = 'items';
   }
   else {
     ownItemsUrl = '/itemsManagement'
@@ -277,6 +281,11 @@ function buildQueryParams() {
         queryParams["name"] = name;
     }
 
+    var empty = document.getElementById("emptyStockCheckbox");
+    if(empty.checked) {
+        queryParams["emptyStock"] = true;
+    } 
+
     var sellerName = document.getElementById("sellerNameInput");
     sellerName = (sellerName == null) ? "" : sellerName.value;
     if(sellerName != "") {
@@ -311,7 +320,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         var urlString;
         if(currentUser.role == 'Admin') {
-            urlString = 'api/items?';
+            urlString = 'items?';
         }
         else {
             urlString = 'itemsManagement?'

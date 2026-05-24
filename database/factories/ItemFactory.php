@@ -124,6 +124,7 @@ class itemFactory extends Factory
             'name' => $this->products[$index],
             'quantity' => fake()->numberBetween(1, 100),
             'description' => fake()->paragraph(50, true),
+            'isActive' => true,
             'price' => fake()->numberBetween(1, 1000000)
         ];
     }
