@@ -24,13 +24,21 @@ class ItemService
 
     public function getNewProducts()
     {
-        return Item::with('category', 'brand')->where('quantity', '!=', 0)->latest()->take(9)->get();
+        return Item::with('category', 'brand')->where('isActive', '=', 1)->where('quantity', '!=', 0)->latest()->take(9)->get();
     }
 
     public function getItems($params)
     {
         $query = Item::query();
-        $query->where('quantity', '>', 0);
+
+        $query->where('isActive', '=', 1);
+        if(Auth::user()->role != 'Admin') {
+            $query->where('quantity', '>', 0);
+        }
+
+        if(($params["emptyStock"] ?? null) && (Auth::user()->role == 'Admin')) {
+            $query->where('quantity', 0);
+        }
 
         if($params["name"] ?? null) {
             $query->where('name', 'like', '%' . $params["name"] . '%');
@@ -70,18 +78,20 @@ class ItemService
             }
         }
 
-        return $query->with('brand', 'category')->paginate(10)->withQueryString();;
+        return $query->with('brand', 'category')->paginate(10)->withQueryString();
     }
 
     public function deleteItem($item) {
         Cart_item::where('item_id', $item->id)->delete();
-        $item->delete();
+        $item->isActive = false;
+        $item->save();
     }
 
     public function createItem($item) {
         Item::create([
             'name' => $item['name'],
             'brand_id' => $item['brand'],
+            'isActive' => true,
             'category_id' => $item['category'],
             'price' => $item['price'],
             'quantity' => $item['quantity'],
@@ -105,8 +115,14 @@ class ItemService
         $query = Item::query();
         $query->where('user_id', '=', Auth::user()->id);
 
+        $query->where('isActive', '=', 1);
+
         if($params["name"] ?? null) {
             $query->where('name', 'like', '%' . $params["name"] . '%');
+        }
+
+        if($params["emptyStock"] ?? null) {
+            $query->where('quantity', 0);
         }
 
         if($params["sellerName"] ?? null) {
@@ -151,6 +167,7 @@ class ItemService
     {
         return Item::with('category', 'brand')
             ->where('category_id', $item->category_id)
+            ->where('isActive', '=', 1)
             ->where('id', '!=', $item->id)
             ->where('quantity', '!=', 0)
             ->latest()

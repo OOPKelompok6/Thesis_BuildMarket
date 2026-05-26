@@ -59,15 +59,17 @@
                         </p>
 
                         @canany(['isSeller', 'isUser'])
-                            <div class="d-flex flex-row">
-                                <button type="submit" class="ms-auto btn btn-primary text-light">
-                                    @can('isOnCart', $item)
-                                        Update
-                                    @else
-                                        Add to cart
-                                    @endcan
-                                </button>
-                            </div>
+                            @if($item->isActive == true)
+                                <div class="d-flex flex-row">
+                                    <button type="submit" class="ms-auto btn btn-primary text-light">
+                                        @can('isOnCart', $item)
+                                            Update
+                                        @else
+                                            Add to cart
+                                        @endcan
+                                    </button>
+                                </div>
+                            @endif
                         @endcanany
                     </form>
                 </div>

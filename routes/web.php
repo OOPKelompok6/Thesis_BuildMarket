@@ -11,6 +11,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemDetailController;
 use App\Http\Controllers\ItemManagementController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TransactionController;
 
 Route::get('/', [HomeController::class, 'index']);
@@ -19,6 +20,7 @@ Route::get('/', [HomeController::class, 'index']);
 //Technically breaks RESTful architecture but still counts as API and semi RESTful
 Route::get('/currentUser', [UserApiController::class, 'getCurrentUser']);
 Route::get('/itemsManagement', [ItemController::class, 'getOwnItems']);
+Route::get('/items', [ItemController::class, 'getItems']);
 
 //Authentication grouping
 Route::get('/register', [UserController::class, 'register']); 
@@ -70,3 +72,6 @@ Route::post('/completeTransactionOther', [CartController::class, 'buyItemsOtherM
 //Transaction Groupings
 Route::get('/transactions', [TransactionController::class, 'transactions'])->middleware('auth');
 Route::get('/transactionDetail/{transaction_header}', [TransactionController::class, 'transactionDetails'])->name('transactionInvDetail')->middleware('auth');
+
+//Dashboard
+Route::get('/dashboard', [DashboardController::class, 'sellerDashboard'])->middleware('auth');

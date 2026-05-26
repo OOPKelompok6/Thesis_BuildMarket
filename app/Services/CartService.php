@@ -44,8 +44,20 @@ class CartService
         $cartItem->delete();
     }
 
-    public function clearCartItem($user_id)
+    public function clearCartItem($payload)
     {
-        Cart_item::where('user_id', $user_id)->delete();
+        $externalPaymentId = $payload['external_payment_id'] ?? null;
+        if($externalPaymentId == null) {
+            Cart_item::where('user_id', $payload['user_id'])->delete();
+        }
+        else {
+            Cart_item::where('user_id', $payload['user_id'])
+                ->where('external_payment_id', $externalPaymentId)->delete();
+        }
+    }
+
+    public function addExternalPaymentId($payload) {
+        $cart_items = Cart_item::where('user_id', $payload['user_id'])
+            ->update(['external_Payment_id' => $payload['external_payment_id']]);
     }
 }

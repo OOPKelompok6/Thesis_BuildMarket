@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Address;
 use App\Models\Item;
 use App\Models\Transaction_detail;
 use App\Models\Transaction_header;
@@ -11,13 +12,19 @@ use Illuminate\Support\Facades\DB;
 
 class TransactionService
 {
-    public function createTransaction($payload)
-    {
-        $header = Transaction_header::create([
-            'user_id' => $payload['user_id'],
-            'payment_id' => $payload['payment_id'] ?? null
-        ]);
+    public function __construct(protected CartService $cartService){}
 
+    public function createTransaction($payload) {
+        $this->createTransactionDetail($payload, $this->createTransactionHeader($payload));
+    }
+
+
+    public function updateTransactionStatus($header) {
+        $header->status = 'ACCEPTED';
+        $header->save();
+    }
+
+    public function createTransactionDetail($payload, $header) {
         foreach($payload['indexes'] as $index => $item_id) {
             Transaction_detail::create([
                 'transaction_header_id' => $header->id,
@@ -27,32 +34,83 @@ class TransactionService
         }
     }
 
+    public function createTransactionHeader($payload)
+    {
+        $header = Transaction_header::create([
+            'user_id' => $payload['user_id'],
+            'payment_id' => $payload['payment_id'],
+            'external_payment_id' => $payload['external_payment_id'] ?? null,
+            'status' => $payload['payment_status'] ?? 'ACCEPTED',
+            'courier' => $payload['courier'],
+            'province_id' => $payload['provinceId'],
+            'city_id' => $payload['cityId'],
+            'district_id' => $payload['districtId'],
+            'total_price' => $payload['totalCost'],
+            'shipping_cost' => $payload['shippingCostValue']
+        ]);
+
+        $address = $this->createAdress($header, $payload);
+        $header->address_id = $address->id;
+        $header->save();
+        return $header;
+    }
+
+    public function createAdress($header, $payload) {
+        return Address::create([
+            'transaction_header_id' => $header->id,
+            'province' => $payload['provinceValue'],
+            'city' => $payload['cityValue'],
+            'district' => $payload['districtValue']
+        ]);
+    }
+
     public function getTransactions() {
         return DB::table('transaction_headers as th')
                         ->join('transaction_details as td', 'td.transaction_header_id', '=', 'th.id')
                         ->join('items as i', 'i.id', '=', 'td.item_id') 
                         ->join('payments as p', 'p.id', '=', 'th.payment_id')
                         ->select('th.*', 'p.vendor', DB::raw('SUM(td.quantity * i.price) as total')) 
+                        ->where('th.status', 'ACCEPTED')
                         ->where('th.user_id', Auth::user()->id)
-                        ->groupBy('th.id', 'th.user_id', 'p.vendor', 'th.payment_id', 'th.created_at', 'th.updated_at')
+                        ->groupBy('th.id', 
+                            'th.user_id', 
+                            'th.address_id',
+                            'p.vendor', 
+                            'th.payment_id', 
+                            'th.created_at', 
+                            'th.updated_at',
+                            'courier',
+                            'shipping_cost',
+                            'total_price',
+                            'province_id',
+                            'city_id',
+                            'district_id',
+                            'status',
+                            'external_payment_id')
                         ->paginate(15);
     }
 
-    public function getTotalPrice($id)
-    {
-        $items = Transaction_detail::with('item')->where('transaction_header_id', $id)->get();
-        $total = 0;
+    public function getSellerTotalItemData() {
+        return DB::table('items as i')
+                        ->join('transaction_details as td', 'td.item_id', '=', 'i.id')
+                        ->select(DB::raw('COALESCE(SUM(IFNULL(td.quantity, 0)), 0) as totalItemSold'), DB::raw('COALESCE(SUM(IFNULL(td.quantity, 0) * i.price), 0) as totalSold')) 
+                        ->where('i.user_id', Auth::user()->id)
+                        ->first();
+    }
 
-        foreach($items as $item) {
-            $total += $item->item->price * $item->quantity;
-        }
-
-        return $total;
+    public function getEmptyStockData() {
+        return Item::where('user_id', Auth::id())->where('isActive', true)->where('quantity', '=', 0)->count();
     }
 
     public function getTransactionItems($id)
     {
         return Transaction_detail::with('item')->where('transaction_header_id', $id)->paginate(20);
+    }
+
+    public function getTransactionHeader($payload)
+    {
+        return Transaction_header::where('user_id', $payload)
+            ->where('external_payment_id', $payload['external_payment_id'])->first();
     }
 
     public function createOtherTransactionMethod($payload)
@@ -73,7 +131,7 @@ class TransactionService
 
         //item Detail processing
         $itemDetail = [];
-        $grossTotal = 0;
+        $grossTotal = $payload['totalCost'] + $payload['shippingCostValue'];
 
         foreach($payload['indexes'] as $index => $itemId) {
             $itemObj = [];
@@ -86,10 +144,19 @@ class TransactionService
             $itemObj['brand'] = $item->brand->name;
             $itemObj['category'] = $item->category->name;
 
-            $grossTotal +=  $payload['quantities'][$index] * $item->price;
-
             $itemDetail[] = $itemObj;
         }
+
+        $itemObj = [];
+
+        $itemObj['id'] = 0;
+        $itemObj['name'] = 'Shipping Cost';
+        $itemObj['price'] = $payload['shippingCostValue'];
+        $itemObj['quantity'] = 1;
+        $itemObj['brand'] = 'RajaOngkir';
+        $itemObj['category'] = 'Shipping';
+
+        $itemDetail[] = $itemObj;
 
         $finPayload['item_details'] = $itemDetail;
 
@@ -133,10 +200,22 @@ class TransactionService
         // Check if request was successful
         if ($response->successful()) {
             $url = $response->object()->payment_url;
+            $payload['external_payment_id'] = $response->object()->order_id;
+
+            $this->createTransactionHeader($payload);
+            $this->cartService->addExternalPaymentId($payload);
+
             return $url;
         }
         else {
             return '/';
         }
+    }
+
+    public function getSellerSalesData() {
+        return Transaction_detail::with('transaction_header', 'item', 'transaction_header.payment')
+            ->whereHas('item', function ($query) {
+                $query->where('user_id', Auth::id());
+            })->paginate(15);
     }
 }

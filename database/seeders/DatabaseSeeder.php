@@ -9,6 +9,7 @@ use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,6 +20,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::statement("SET sql_mode='NO_AUTO_VALUE_ON_ZERO'");
+
         Brand::factory(15)->create();
         Category::factory(5)->create();
         User::factory(100)->create();
@@ -31,6 +34,15 @@ class DatabaseSeeder extends Seeder
         ]);
         Item::factory(200)->create(['brand_id' => 1, 'user_id' => 1, 'category_id' => 1]);
         Payment::factory(150)->create(['user_id' => 1]);
+
+        Payment::factory()->create([
+            'id' => 0,
+            'user_id' => 0,
+            'vendor' => 'Midtrans',
+            'expiration_Date' => fake()->creditCardExpirationDate(),
+            'cardNumber' => fake()->numberBetween(1000000000000000, 9999999999999999),
+            'billingAddress' => fake()->address()
+        ]);
 
         $sellers_id = User::where('role', 'Seller')->pluck('id');
         $brand_id = Brand::pluck('id');

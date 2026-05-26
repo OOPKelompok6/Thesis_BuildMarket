@@ -49,6 +49,13 @@
                         </select>
                     </div>
 
+                    <div class="form-check mb-3 mx-2">
+                        <input class="form-check-input" type="checkbox" value="" id="emptyStockCheckbox">
+                        <label class="form-check-label" for="emptyStockCheckbox">
+                            Only empty stock items
+                        </label>
+                    </div>
+
                     <div class="d-flex flex-row my-3">
                         @can('isSeller')
                             <a href="/newItem" id="newItemButton" class="ms-2 me-auto btn btn-primary">New Item</a>

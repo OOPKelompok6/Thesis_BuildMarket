@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->text('description');
             $table->integer('price');
+            $table->boolean('isActive');
             $table->foreignIdFor(Brand::class);
             $table->foreignIdFor(Category::class);
             $table->foreignIdFor(User::class);

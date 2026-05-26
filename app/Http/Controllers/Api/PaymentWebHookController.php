@@ -38,34 +38,46 @@ class PaymentWebHookController extends Controller
         }
 
         $user_id = request()->input('order_id');
+        $order_id = request()->input('order_id');
         $user_id = substr($user_id, 0, strpos($user_id, '-')); 
+        $order_id = substr($order_id, 0, strpos($order_id, '-', 4)); 
 
-        $payload = $this->recreatePayload($user_id);
-        $this->transactionService->createTransaction($payload);
-        $this->itemService->updateItemStock($payload);
-        $this->cartService->clearCartItem($payload['user_id']);
+        $payload = $this->recreatePayload($user_id, $order_id);
+        $header = $this->transactionService->getTransactionHeader($payload);
+
+        if($header) {
+            $this->transactionService->updateTransactionStatus($header);
+            $this->transactionService->createTransactionDetail($payload, $header);
+            $this->itemService->updateItemStock($payload);
+            $this->cartService->clearCartItem($payload);
+
+            return response()->json([
+                'message' => 'Succesfully handled payment'
+            ], 200);
+        }
 
         return response()->json([
-                'message' => 'Succesfully handled payment'
-        ], 200);
+                'message' => 'Payment not found'
+        ], 404);
     }
 
-    private function recreatePayload($user_id) {
+    private function recreatePayload($user_id, $order_id) {
         $payload = [];
         
         $payload['user_id'] = $user_id;
+        $payload['external_payment_id'] = $order_id;
 
         $indexes = [];
         $quantities = [];
 
-        $cart_items = Cart_item::where('user_id', $user_id)->get();
+        $cart_items = Cart_item::where('user_id', $user_id)
+            ->where('external_payment_id', $order_id)->get();
 
         foreach($cart_items as $cart_item) {
             $indexes[] = $cart_item->item_id;
             $quantities[] = $cart_item->quantity;
         }
 
-        $payload['payment_id'] = 0;
         $payload['indexes'] = $indexes;
         $payload['quantities'] = $quantities;
 
