@@ -59,7 +59,7 @@
                         </p>
 
                         @canany(['isSeller', 'isUser'])
-                            @if($item->isActive == true)
+                            @if(($item->isActive == true) && ($item->quantity > 0))
                                 <div class="d-flex flex-row">
                                     <button type="submit" class="ms-auto btn btn-primary text-light">
                                         @can('isOnCart', $item)
