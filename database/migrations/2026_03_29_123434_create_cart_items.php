@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Item::class);
+            $table->string('external_payment_id')->nullable();
             $table->integer('quantity');
         });
     }

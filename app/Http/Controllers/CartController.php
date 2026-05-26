@@ -49,21 +49,41 @@ class CartController extends Controller
 
     public function buyItems()
     {
-        request()->validate([
-            'payment_id' => 'required'
+        $payload = request()->validate([
+            'indexes' => 'required',
+            'quantities' => 'required',
+            'payment_id' => 'required',
+            'courier' => 'required',
+            'provinceId' => 'required',
+            'cityId' => 'required',
+            'districtId' => 'required',
+            'totalCost' => 'required',
+            'shippingCostValue' => 'required'
         ]);
     
-        $payload = request()->only(['payment_id', 'quantities', 'indexes']);
         $payload['user_id'] = Auth::user()->id;
 
         $this->transactionService->createTransaction($payload);
         $this->itemService->updateItemStock($payload);
-        $this->cartService->clearCartItem($payload['user_id']);
+        $this->cartService->clearCartItem($payload);
         return redirect('/cart');
     }
 
     public function buyItemsOtherMethods() {
-        $payload = request()->only(['quantities', 'indexes']);
+        $payload = request()->validate([
+            'indexes' => 'required',
+            'quantities' => 'required',
+            'courier' => 'required',
+            'provinceId' => 'required',
+            'cityId' => 'required',
+            'districtId' => 'required',
+            'totalCost' => 'required',
+            'shippingCostValue' => 'required'
+        ]);
+        $payload['payment_id'] = 0;
+        $payload['payment_status'] = 'PENDING';
+        $payload['user_id'] = Auth::user()->id;
+
         $qrisURL = $this->transactionService->createOtherTransactionMethod($payload);
         return redirect($qrisURL);
     }

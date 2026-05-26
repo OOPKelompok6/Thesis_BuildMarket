@@ -78,7 +78,7 @@ class ItemService
             }
         }
 
-        return $query->with('brand', 'category')->paginate(10)->withQueryString();;
+        return $query->with('brand', 'category')->paginate(10)->withQueryString();
     }
 
     public function deleteItem($item) {

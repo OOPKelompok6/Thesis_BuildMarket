@@ -42,6 +42,37 @@
                         {{ $cartItems->links() }}
                     </div>
                 </div>
+
+                <div class="bg-light rounded-3 mx-3 my-5 w-100">
+                    <p class="text-dark fs-4 fw-bold ms-2 my-2">Shipments</p>
+                    
+                    <div class="mb-3 mx-2">
+                        <label for="courierSelect" class="form-label">Courier</label>
+                        <select id="courierSelect" class="form-select" name="courier">
+                            <option value="jne">JNE</option>
+                            <option value="pos">POS Indonesia</option>
+                            <option value="sicepat">SiCepat</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3 mx-2">
+                        <label for="provinceSelect" class="form-label">Province</label>
+                        <select id="provinceSelect" class="form-select" name="provinceId">
+                        </select>
+                    </div>
+
+                    <div class="mb-3 mx-2">
+                        <label for="citySelect" class="form-label">City</label>
+                        <select id="citySelect" class="form-select" name="cityId">
+                        </select>
+                    </div>
+
+                    <div class="mb-3 mx-2">
+                        <label for="districtSelect" class="form-label">District</label>
+                        <select id="districtSelect" class="form-select" name="districtId">
+                        </select>
+                    </div>
+                </div>
             </div>
 
             <div class="d-flex flex-column w-72">
@@ -62,6 +93,9 @@
                     </div>
                 @endforelse
             </div>
+
+            <input value="{{ $totalPrice }}" type="number" class="form-control d-none" id="totalCostForm" name="totalCost">
+            <input type="number" class="form-control d-none" id="shippingCostForm" name="shippingCostValue">
         </form>
 
         {{-- Total --}}
@@ -70,6 +104,9 @@
                 <div class="d-flex flex-column align-items-end">
                     <p class="text-light fw-bold fs-5 mb-3">
                         Total: {{ "Rp " . number_format($totalPrice, 0, ',', '.') }}
+                    </p>
+                    <p id="shippingCost" class="text-light fs-6 mb-4">
+                        Shipping Cost: Rp 0
                     </p>
                     <div class="gap-3 d-flex flex-row">
                         <button id="checkoutBtnQRIS" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-primary text-light px-4">Checkout With Other Methods</button>

@@ -24,7 +24,12 @@ class TransactionController extends Controller
         if (Gate::allows('isUser') || Gate::allows('isSeller')){
             return view('transactions.transactionDetail', 
                 ['payment' => $transactionHeader->payment,
-                 'totalPrice' => $this->transactionService->getTotalPrice($transactionHeader->id),
+                 'province_id' => $transactionHeader->province_id,
+                 'city_id' => $transactionHeader->city_id,
+                 'district_id' => $transactionHeader->district_id,
+                 'courier' => $transactionHeader->courier,
+                 'shipping_cost' => $transactionHeader->shipping_cost,
+                 'totalPrice' => $transactionHeader->total_price,
                  'transactionItems' => $this->transactionService->getTransactionItems($transactionHeader->id)
                 ]);
         } else {
