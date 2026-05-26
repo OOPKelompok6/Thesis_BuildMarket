@@ -213,10 +213,17 @@ async function evaluateShippingPrice() {
             document.getElementById('shippingCost').innerHTML = 'Shipping Cost:' + idrFormatter.format(costJson.data.data[0].cost);
             document.getElementById('shippingCostForm').value = costJson.data.data[0].cost;
 
+            changeDestination();
         } catch (error) {
             console.error(error.message);
         }
     }
+}
+
+function changeDestination() {
+    document.getElementById('provinceForm').value = document.getElementById('provinceSelect').selectedOptions[0].innerHTML;
+    document.getElementById('cityForm').value = document.getElementById('citySelect').selectedOptions[0].innerHTML;
+    document.getElementById('districtForm').value = document.getElementById('districtSelect').selectedOptions[0].innerHTML;
 }
 
 function configureCostEventChange(districtSelect, courierSelect) {

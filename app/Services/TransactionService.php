@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Address;
 use App\Models\Item;
 use App\Models\Transaction_detail;
 use App\Models\Transaction_header;
@@ -48,7 +49,19 @@ class TransactionService
             'shipping_cost' => $payload['shippingCostValue']
         ]);
 
+        $address = $this->createAdress($header, $payload);
+        $header->address_id = $address->id;
+        $header->save();
         return $header;
+    }
+
+    public function createAdress($header, $payload) {
+        return Address::create([
+            'transaction_header_id' => $header->id,
+            'province' => $payload['provinceValue'],
+            'city' => $payload['cityValue'],
+            'district' => $payload['districtValue']
+        ]);
     }
 
     public function getTransactions() {
@@ -61,6 +74,7 @@ class TransactionService
                         ->where('th.user_id', Auth::user()->id)
                         ->groupBy('th.id', 
                             'th.user_id', 
+                            'th.address_id',
                             'p.vendor', 
                             'th.payment_id', 
                             'th.created_at', 

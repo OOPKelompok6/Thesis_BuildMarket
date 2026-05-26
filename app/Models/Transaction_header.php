@@ -12,6 +12,10 @@ class Transaction_header extends Model
         return $this->hasMany(Transaction_detail::class);
     }
 
+    public function address() {
+        return $this->hasOne(Address::class);
+    }
+
     public function user() {
         return $this->belongsTo(User::class);
     }

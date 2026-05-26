@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Address;
 use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -17,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Payment::class);
+            $table->foreignIdFor(Address::class)->nullable();
             $table->string('external_payment_id')->nullable();
             $table->string('status');
             $table->string('courier');

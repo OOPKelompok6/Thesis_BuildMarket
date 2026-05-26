@@ -27,6 +27,34 @@
                         {{ $transactionItems->links() }}
                     </div>
                 </div>
+
+                <div class="bg-light rounded-3 mx-3 my-5 w-100">
+                    <p class="text-dark fs-4 fw-bold ms-2 my-2">Shipment</p>
+                    
+                    <div>
+                        <div class="d-flex flex-column flex-grow-1 mx-5 mb-3 rounded-3 border border-1">
+                            <div class="mx-2 my-1">
+                                <p class="fs-6 fw-bold my-0">
+                                    @if ($courier == 'jne')
+                                        JNE
+                                    @elseif($courier == 'pos')
+                                        POS Indonesia
+                                    @elseif($courier == 'sicepat')
+                                        SiCepat
+                                    @endif
+                                </p>
+                                <p class="my-0" style="font-size: 0.8rem;">{{ $provinceValue }}</p>
+                                <p class="my-0" style="font-size: 0.8rem;">{{ $cityValue }}</p>
+                                <p class="my-0" style="font-size: 0.8rem; opacity: 80%;">{{ $districtValue }}</p>
+                                <p class="my-0" style="font-size: 0.8rem; opacity: 80%;">{{ "Rp " . number_format($shipping_cost, 0, ',', '.') }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column w-100 align-items-center">
+                        {{ $transactionItems->links() }}
+                    </div>
+                </div>
             </div>
 
             <div class="d-flex flex-column w-72">

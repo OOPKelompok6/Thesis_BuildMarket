@@ -58,7 +58,10 @@ class CartController extends Controller
             'cityId' => 'required',
             'districtId' => 'required',
             'totalCost' => 'required',
-            'shippingCostValue' => 'required'
+            'shippingCostValue' => 'required',
+            'provinceValue' => 'required',
+            'cityValue' => 'required',
+            'districtValue' => 'required'
         ]);
     
         $payload['user_id'] = Auth::user()->id;
@@ -78,7 +81,10 @@ class CartController extends Controller
             'cityId' => 'required',
             'districtId' => 'required',
             'totalCost' => 'required',
-            'shippingCostValue' => 'required'
+            'shippingCostValue' => 'required',
+            'provinceValue' => 'required',
+            'cityValue' => 'required',
+            'districtValue' => 'required'
         ]);
         $payload['payment_id'] = 0;
         $payload['payment_status'] = 'PENDING';

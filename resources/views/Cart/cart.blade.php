@@ -96,6 +96,10 @@
 
             <input value="{{ $totalPrice }}" type="number" class="form-control d-none" id="totalCostForm" name="totalCost">
             <input type="number" class="form-control d-none" id="shippingCostForm" name="shippingCostValue">
+
+            <input type="text" class="form-control d-none" id="provinceForm" name="provinceValue">
+            <input type="text" class="form-control d-none" id="cityForm" name="cityValue">
+            <input type="text" class="form-control d-none" id="districtForm" name="districtValue">
         </form>
 
         {{-- Total --}}
