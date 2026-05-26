@@ -19,7 +19,8 @@ class DashboardController extends Controller
             return view('Dashboard', 
                 [
                     'emptyStockData' => $this->transactionService->getEmptyStockData(),
-                    'metricData' =>  $this->transactionService->getSellerTotalItemData()
+                    'metricData' =>  $this->transactionService->getSellerTotalItemData(),
+                    'transactions' => $this->transactionService->getSellerSalesData()
                 ]
             );
         } else {

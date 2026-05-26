@@ -197,4 +197,11 @@ class TransactionService
             return '/';
         }
     }
+
+    public function getSellerSalesData() {
+        return Transaction_detail::with('transaction_header', 'item', 'transaction_header.payment')
+            ->whereHas('item', function ($query) {
+                $query->where('user_id', Auth::id());
+            })->paginate(15);
+    }
 }
