@@ -48,8 +48,11 @@
 
         @guest
             <div class="d-flex ms-auto mx-1">
-                <a href="/register" type="button" class="btn btn-secondary rounded-pill" >
-                    <span class="text-light fs-6 fw-normal">Register</span>
+                <a href="/register" type="button" class="btn btn-secondary rounded-pill mx-2" >
+                    <span class="text-light fs-6 fw-normal mx-1">Register</span>
+                </a>
+                <a href="/login" type="button" class="btn btn-secondary rounded-pill mx-2">
+                    <span class="text-light fs-6 fw-normal mx-1">Login</span>
                 </a>
             </div>
         @endguest

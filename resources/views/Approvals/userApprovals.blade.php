@@ -10,11 +10,13 @@
                 <div class="div-flex my-4 mb">
                     <label for="formNPWP" class="fs-3 text-light form-label">NPWP Number</label>
                     <input placeholder="9990000000999000" name="npwp_number" class="form-control" type="text" id="formNPWP">
+                    <x-errorValidationLabel name="npwp_number"></x-errorValidationLabel>
                 </div>
 
                 <div class="div-flex my-4">
                     <label for="formFile" class="fs-3 text-light form-label">NIB Document</label>
                     <input class="form-control" name="NIBDocument" type="file" id="formFile">
+                     <x-errorValidationLabel name="NIBDocument"></x-errorValidationLabel>
                 </div>
                 <x-generalButton buttonType="button" type="submit" class="mx-auto w-25 my-5 text-light bg-primary" message="Upload"></x-generalButton>
             </form>
