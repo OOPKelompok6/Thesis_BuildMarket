@@ -19,6 +19,7 @@ return new class extends Migration
             $table->datetime('expiration_Date');
             $table->text('cardNumber');
             $table->string('billingAddress');
+            $table->boolean('isActive')->default(true);
             $table->timestamps();
         });
     }
