@@ -1,7 +1,7 @@
 @props(['product', 'cardWidth', 'cartItem'])
 
 <div class="d-flex flex-row rounded-3 overflow-hidden"
-        style="background-color: #ffffff; border: 1px solid #2e2e2e; max-width: {{ $cardWidth ?? '33%' }};">
+        style="flex: 1; background-color: #ffffff; border: 1px solid #2e2e2e; max-width: {{ $cardWidth ?? '33%' }};">
     <div style="width: 80px; min-height: 100px; background-color: #ffffff; flex-shrink: 0;"
         class="d-flex align-items-center justify-content-center">
             <img src="

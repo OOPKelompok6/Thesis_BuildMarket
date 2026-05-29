@@ -135,7 +135,7 @@ function builtPagination(pageSpecs) {
 function createCard(item) {
     var cardOuter = document.createElement("div");
     cardOuter.setAttribute("class", "d-flex flex-row rounded-3 overflow-hidden");
-    cardOuter.setAttribute("style", "background-color: #ffffff; border: 1px solid #2e2e2e; max-width: 50%;");
+    cardOuter.setAttribute("style", "flex: 1; background-color: #ffffff; border: 1px solid #2e2e2e; max-width: 50%;");
     
     var imageContainer = document.createElement("div");
     imageContainer.setAttribute("class", "d-flex align-items-center justify-content-center");

@@ -10,7 +10,7 @@ class PaymentService
 {
 
     public function getPayments($user) {
-        return $user->payments;
+        return $user->payments()->where('isActive', true)->get();
     }
 
     public function createPayment($payment) {
@@ -19,7 +19,8 @@ class PaymentService
     }
 
     public function deletePayment($payment) {
-        $payment->delete();
+        $payment->isActive = false;
+        $payment->save();
     }
 
     public function editPayment($payment, $paymentNew) {
