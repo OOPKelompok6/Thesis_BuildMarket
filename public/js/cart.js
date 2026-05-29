@@ -18,11 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
             let updateInput = document.getElementById('updateFinInput');
             let sbmtBtn = document.getElementById('sbmtBtn');
 
-            if (!inpElement.checkValidity()) {
-                inpElement.reportValidity();
-                return;
-            }
-
             updateInput.setAttribute('max', inpElement.getAttribute('max'));
             updateInput.value = inpElement.value;
             updateForm.setAttribute('action', `cart/${updId}`);
@@ -36,6 +31,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             headerText.innerHTML = 'Confirm Update';
             contentText.innerHTML = 'Are you sure you want to update this item?';
+
+            if (!inpElement.checkValidity()) {
+                inpElement.reportValidity();
+                return;
+            }
         });
     });
 
