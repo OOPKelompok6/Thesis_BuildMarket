@@ -54,7 +54,7 @@
                             <tr>
                                 <td class="text-center">{{ $transaction->transaction_header->id }}</td>
                                 <td class="text-center">{{ (new DateTime($transaction->transaction_header->created_at))->format('Y-m-d') }}</td>
-                                <td class="text-center">{{ "Rp " . number_format($transaction->transaction_header->total_price, 0, ',', '.') }}</td>
+                                <td class="text-center">{{ "Rp " . number_format(($transaction->quantity * $transaction->item->price), 0, ',', '.') }}</td>
                                 <td class="text-center">{{ $transaction->transaction_header->payment->vendor }}</td>
                                 <td class="text-center">{{ "Rp " . number_format($transaction->item->price, 0, ',', '.') }}</td>
                                 <td class="text-center">{{ "Rp " . number_format($transaction->transaction_header->shipping_cost, 0, ',', '.') }}</td>
