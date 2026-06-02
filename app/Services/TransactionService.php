@@ -190,6 +190,10 @@ class TransactionService
             "indomaret"
         ];
 
+        $finPayload['callbacks'] = [
+            'finish' => url('/cart'),
+        ];
+
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
