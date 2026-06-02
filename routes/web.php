@@ -67,7 +67,7 @@ Route::post('/addToCart', [CartController::class, 'addToCart'])->middleware('aut
 Route::post('/cart/{cartItem}', [CartController::class, 'updateCart'])->middleware('auth');
 Route::delete('/cart/{cartItem}', [CartController::class, 'deleteCartItem'])->middleware('auth');
 Route::post('/completeTransaction', [CartController::class, 'buyItems'])->middleware('auth');
-Route::post('/completeTransactionOther', [CartController::class, 'buyItemsOtherMethods'])->middleware('auth');
+Route::post('/completeTransactionOther', [CartControl1ler::class, 'buyItemsOtherMethods'])->middleware('auth');
 
 //Transaction Groupings
 Route::get('/transactions', [TransactionController::class, 'transactions'])->middleware('auth');

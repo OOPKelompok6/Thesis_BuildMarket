@@ -189,6 +189,9 @@ class TransactionService
             "alfamart",
             "indomaret"
         ];
+        $finPayload['callbacks'] = [
+            'finish' => url('/transactions'),
+        ];
 
         $response = Http::withHeaders([
             'Accept' => 'application/json',
