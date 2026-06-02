@@ -85,6 +85,11 @@ class CartController extends Controller
             'provinceValue' => 'required',
             'cityValue' => 'required',
             'districtValue' => 'required'
+        ],[
+            'courier.required' => 'Please select a courier.',
+            'provinceId.required' => 'Please select a province.',
+            'cityId.required' => 'Please select a city.',
+            'districtId.required' => 'Please select a district.'
         ]);
         $payload['payment_id'] = 0;
         $payload['payment_status'] = 'PENDING';

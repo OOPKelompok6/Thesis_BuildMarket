@@ -49,28 +49,36 @@
                     <div class="mb-3 mx-2">
                         <label for="courierSelect" class="form-label">Courier</label>
                         <select id="courierSelect" class="form-select" name="courier">
+                            <option value="">Choose Courier</option>
                             <option value="jne">JNE</option>
                             <option value="pos">POS Indonesia</option>
                             <option value="sicepat">SiCepat</option>
                         </select>
+                        <x-errorValidationLabel name="courier" />
                     </div>
 
                     <div class="mb-3 mx-2">
                         <label for="provinceSelect" class="form-label">Province</label>
                         <select id="provinceSelect" class="form-select" name="provinceId">
+                            <option value="">Choose Province</option>
                         </select>
+                        <x-errorValidationLabel name="provinceId" />
                     </div>
 
                     <div class="mb-3 mx-2">
                         <label for="citySelect" class="form-label">City</label>
                         <select id="citySelect" class="form-select" name="cityId">
+                            <option value="">Choose City</option>
                         </select>
+                        <x-errorValidationLabel name="cityId" />
                     </div>
 
                     <div class="mb-3 mx-2">
                         <label for="districtSelect" class="form-label">District</label>
                         <select id="districtSelect" class="form-select" name="districtId">
+                            <option value="">Choose District</option>
                         </select>
+                        <x-errorValidationLabel name="districtId" />
                     </div>
                 </div>
             </div>
