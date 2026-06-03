@@ -17,6 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if(endDate) {
+            if(!startDate) {
+                url = url + '?';
+            }
+
             url = url + `&endDate=${endDate}`;
         }
 
