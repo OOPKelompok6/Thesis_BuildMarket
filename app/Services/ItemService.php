@@ -32,7 +32,7 @@ class ItemService
         $query = Item::query();
 
         $query->where('isActive', '=', 1);
-        if(Auth::user()->role != 'Admin') {
+        if(Auth::user()?->role != 'Admin') {
             $query->where('quantity', '>', 0);
         }
 
