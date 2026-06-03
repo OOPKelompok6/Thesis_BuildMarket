@@ -1,36 +1,61 @@
-<x-layout>
+<x-layout :customScript="[secure_asset('js/dashboard.js')]" deffered="true">
     <div class="d-flex flex-column w-100 min-vh-100 align-items-center">
-        <div class="d-flex w-50 flex-column bg-light mx-auto my-auto rounded-5">
-            <div style="height: 3.5rem" class="bg-dark p-0 m-0 w-100 rounded-top-5"></div>
+        
+        <div class="d-flex flex-row w-75 my-4">
+            <div style="flex: 1 1 auto;" class="flex-grow-1 me-3 d-flex flex-column bg-light mx-auto my-auto rounded-5">
+                <form class="d-flex flex-column" method="GET" action="/dashboard">
+                    @csrf
 
-            <div class="d-flex flex-row">
-                <div style="flex: 1;" class="d-flex flex-column ms-3 my-4 rounded-3 border border-1"">
-                    <div class="mx-2 my-1">
-                        <p class="fs-6 fw-bold my-0">Total Sales</p>
-                        <p class="my-2" style="font-size: 1rem;">{{ "Rp " . number_format($metricData->totalSold, 0, ',', '.') }}</p>
+                    <div class="mb-3 my-4 mx-2">
+                        <label for="startDate" class="form-label">Start Date</label>
+                        <input type="date" name="startDate" class="form-control" id="startDate" aria-describedby="startDate">
                     </div>
-                </div>
 
-                <div style="flex: 1;" class="d-flex flex-column mx-1 my-4 rounded-3 border border-1"">
-                    <div class="mx-2 my-1">
-                        <p class="fs-6 fw-bold my-0">Item Sold</p>
-                        <p class="my-2" style="font-size: 1rem;">{{ $metricData->totalItemSold }} items</p>
+                    <div class="mb-3 mx-2">
+                        <label for="endDate" class="form-label">End Date</label>
+                        <input type="date" name="endDate" class="form-control" id="endDate" aria-describedby="endDate">
                     </div>
-                </div>
 
-                <div style="flex: 1;" class="d-flex flex-column me-3 my-4 rounded-3 border border-1"">
-                    <div class="mx-2 my-1">
-                        <p class="fs-6 fw-bold my-0">Empty Stock Items</p>
-                        <p class="my-2" style="font-size: 1rem;">{{ $emptyStockData }} items</p>
-                        <a href="/itemManagement?emptyStock=true" class="ms-auto text-secondary" style="text-decoration: none; font-size: 0.8rem;">
-                            View empty stock &rsaquo;
-                        </a>
+                    <div class="ms-auto me-3 mb-3">
+                        <button type="submit" class="btn btn-primary text-light px-4">
+                            Set Date
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div style="flex: 1 1 auto;" class="flex-grow-1 d-flex flex-column bg-light mx-auto my-auto rounded-5">
+                <div style="height: 3.5rem" class="bg-dark p-0 m-0 w-100 rounded-top-5"></div>
+
+                <div class="d-flex flex-row">
+                    <div style="flex: 1;" class="d-flex flex-column ms-3 my-4 rounded-3 border border-1"">
+                        <div class="mx-2 my-1">
+                            <p class="fs-6 fw-bold my-0">Total Sales</p>
+                            <p class="my-2" style="font-size: 1rem;">{{ "Rp " . number_format($metricData->totalSold, 0, ',', '.') }}</p>
+                        </div>
+                    </div>
+
+                    <div style="flex: 1;" class="d-flex flex-column mx-1 my-4 rounded-3 border border-1"">
+                        <div class="mx-2 my-1">
+                            <p class="fs-6 fw-bold my-0">Item Sold</p>
+                            <p class="my-2" style="font-size: 1rem;">{{ $metricData->totalItemSold }} items</p>
+                        </div>
+                    </div>
+
+                    <div style="flex: 1;" class="d-flex flex-column me-3 my-4 rounded-3 border border-1"">
+                        <div class="mx-2 my-1">
+                            <p class="fs-6 fw-bold my-0">Empty Stock Items</p>
+                            <p class="my-2" style="font-size: 1rem;">{{ $emptyStockData }} items</p>
+                            <a href="/itemManagement?emptyStock=true" class="ms-auto text-secondary" style="text-decoration: none; font-size: 0.8rem;">
+                                View empty stock &rsaquo;
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="d-flex w-75 flex-column bg-light mx-auto mt-2 mb-4 rounded-5">
+        <div class="d-flex w-75 flex-column bg-light mx-auto mt-2 mb-5 rounded-5">
             @if (count($transactions) == 0)
                 <p class="fs-3 text-dark mx-auto my-5">Empty Transaction List</p>
             @else
@@ -71,8 +96,12 @@
                     </table>
                 </div>
 
-                <div class="d-flex ms-auto me-5 gap-2">
-                    {{ $transactions->links() }}
+                <div class="d-flex flex-row">
+                    <div class="d-flex me-auto ms-5 gap-2">
+                        {{ $transactions->links() }}
+                    </div>
+
+                    <a id="exportBtn" style="text-decoration: none;" class="me-5 pe-2 fs-5 mb-2" href="/dashboard/export/"><i class="bi bi-file-earmark-excel"></i>Export</a>
                 </div>
             @endif
         </div>

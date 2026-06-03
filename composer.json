@@ -10,6 +10,7 @@
         "azure-oss/storage-blob-laravel": "^1.7",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
+        "maatwebsite/excel": "^3.1",
         "mews/purifier": "^3.4",
         "midtrans/midtrans-php": "^2.6",
         "tinymce/tinymce": "^8.4"

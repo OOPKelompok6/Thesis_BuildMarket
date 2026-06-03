@@ -216,10 +216,25 @@ class TransactionService
         }
     }
 
-    public function getSellerSalesData() {
-        return Transaction_detail::with('transaction_header', 'item', 'transaction_header.payment')
-            ->whereHas('item', function ($query) {
-                $query->where('user_id', Auth::id());
+    public function getSellerSalesData($startDate, $endDate) {
+
+        $query = Transaction_detail::query();
+        $query->with('transaction_header', 'item', 'transaction_header.payment');
+
+        if($startDate) {
+            $query->whereHas('transaction_header', function ($subQuery) use ($startDate) {
+                $subQuery->where('created_at', '>=', $startDate);
+            });
+        }
+
+        if($endDate) {
+            $query->whereHas('transaction_header', function ($subQuery) use ($endDate) {
+                $subQuery->where('created_at', '<=', $endDate . ' 23:59:59');
+            });
+        }
+
+        return $query->whereHas('item', function ($subQuery) {
+                $subQuery->where('user_id', Auth::id());
             })->paginate(15);
     }
 }

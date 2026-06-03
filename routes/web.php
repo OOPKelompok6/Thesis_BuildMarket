@@ -75,3 +75,4 @@ Route::get('/transactionDetail/{transaction_header}', [TransactionController::cl
 
 //Dashboard
 Route::get('/dashboard', [DashboardController::class, 'sellerDashboard'])->middleware('auth');
+Route::get('/dashboard/export', [DashboardController::class, 'exportExcel'])->middleware('auth');
