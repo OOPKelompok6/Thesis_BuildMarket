@@ -124,9 +124,9 @@ async function configureShipmentButtons() {
             provinceSelect.appendChild(option);
         })
 
+        configureCostEventChange(districtSelect, courierSelect);
         configureCitySelect(provinceSelect, citySelect);
         configureDistrictSelect(citySelect, districtSelect);
-        configureCostEventChange(districtSelect, courierSelect);
 
         provinceSelect.dispatchEvent(new Event('change'));
 
@@ -191,6 +191,8 @@ function configureDistrictSelect(citySelect, districtSelect) {
                 districtSelect.appendChild(districtOption);
             })
 
+            districtSelect.dispatchEvent(new Event('change'));
+            
         } catch (error) {
             console.error(error.message);
         }
