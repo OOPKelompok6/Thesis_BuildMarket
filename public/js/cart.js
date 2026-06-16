@@ -114,6 +114,7 @@ async function configureShipmentButtons() {
         }
         itemJson = await provinceResponse.json();
         
+        provinceSelect.innerHTML = "";
         itemJson.data.data.forEach((province) => {
             const option = document.createElement('option');
             
@@ -146,6 +147,7 @@ function configureCitySelect(provinceSelect, citySelect) {
             }
             cityJson = await cityResponse.json();
             
+            citySelect.innerHTML = "";
             cityJson.data.data.forEach((city) => {
                 const optionCity = document.createElement('option');
                 
@@ -175,6 +177,7 @@ function configureDistrictSelect(citySelect, districtSelect) {
             }
             districtJson = await districtResponse.json();
             
+            districtSelect.innerHTML = "";
             districtJson.data.data.forEach((district) => {
                 const districtOption = document.createElement('option');
                 
