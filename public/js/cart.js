@@ -128,7 +128,7 @@ async function configureShipmentButtons() {
         configureDistrictSelect(citySelect, districtSelect);
         configureCostEventChange(districtSelect, courierSelect);
 
-        provinceSelect.dispatchEvent('change');
+        provinceSelect.dispatchEvent(new Event('change'));
 
     } catch (error) {
         console.error(error.message);
@@ -159,7 +159,7 @@ function configureCitySelect(provinceSelect, citySelect) {
                 citySelect.appendChild(optionCity);
             })
 
-            citySelect.dispatchEvent('change');
+            citySelect.dispatchEvent(new Event('change'));
 
         } catch (error) {
             console.error(error.message);
