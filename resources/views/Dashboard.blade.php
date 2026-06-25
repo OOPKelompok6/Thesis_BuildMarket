@@ -55,7 +55,7 @@
             </div>
         </div>
 
-        <div class="d-flex w-75 flex-column bg-light mx-auto mt-2 mb-5 rounded-5">
+        <div style="width= 90% !important;" class="d-flex flex-column bg-light mx-auto mt-2 mb-5 rounded-5">
             @if (count($transactions) == 0)
                 <p class="fs-3 text-dark mx-auto my-5">Empty Transaction List</p>
             @else
@@ -71,6 +71,9 @@
                                 <th scope="col"><div class="d-flex"><span class="mx-auto">Payment Method</span></div></th>
                                 <th scope="col"><div class="d-flex"><span class="mx-auto">Price</span></div></th>
                                 <th scope="col"><div class="d-flex"><span class="mx-auto">Shipping Cost</span></div></th>
+                                <th style="width: 60px; scope="col"><div class="d-flex"><span class="mx-auto">Location</span></div></th>
+                                <th style="width: 60px; scope="col"><div class="d-flex"><span class="mx-auto">District</span></div></th>
+                                <th style="width: 60px; scope="col"><div class="d-flex"><span class="mx-auto">Sub District</span></div></th>
                                 <th scope="col"><div class="d-flex"><span class="mx-auto">View Item</span></div></th>
                             </tr>
                         </thead>
@@ -83,6 +86,9 @@
                                 <td class="text-center">{{ $transaction->transaction_header->payment->vendor }}</td>
                                 <td class="text-center">{{ "Rp " . number_format($transaction->item->price, 0, ',', '.') }}</td>
                                 <td class="text-center">{{ "Rp " . number_format($transaction->transaction_header->shipping_cost, 0, ',', '.') }}</td>
+                                <td class="text-center">{{ $transaction->transaction_header->address->province }}</td>
+                                <td class="text-center">{{ $transaction->transaction_header->address->city }}</td>
+                                <td class="text-center">{{ $transaction->transaction_header->address->district }}</td>
                                 <td class="text-center">
                                     <div class="d-flex">
                                         <a class="my-auto mx-auto" href="itemManagement?name={{ $transaction->item->name }}">

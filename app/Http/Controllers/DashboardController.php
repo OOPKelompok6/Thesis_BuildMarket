@@ -21,6 +21,7 @@ class DashboardController extends Controller
         $endDate = request('endDate');
 
         if (Gate::allows('isSeller')) {
+
             return view('Dashboard', 
                 [
                     'emptyStockData' => $this->transactionService->getEmptyStockData(),
