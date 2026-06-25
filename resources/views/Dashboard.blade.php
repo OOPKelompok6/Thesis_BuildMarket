@@ -57,7 +57,7 @@
 
         <div style="width= 90% !important;" class="d-flex flex-column bg-light mx-auto mt-2 mb-5 rounded-5">
             @if (count($transactions) == 0)
-                <p class="fs-3 text-dark mx-auto my-5">Empty Transaction List</p>
+                <p class="fs-3 w-100 text-dark mx-auto my-5">Empty Transaction List</p>
             @else
                 <div class="text-dark w-75 me-auto my-4 ms-4 fs-3 fw-bold">Transaction List</div>
                 <div class="d-flex flex-row mx-auto mb-4">
