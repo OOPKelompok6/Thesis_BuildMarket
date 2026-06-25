@@ -219,7 +219,7 @@ class TransactionService
     public function getSellerSalesData($startDate, $endDate) {
 
         $query = Transaction_detail::query();
-        $query->with('transaction_header', 'item', 'transaction_header.payment');
+        $query->with('transaction_header', 'item', 'transaction_header.payment', 'transaction_header.address');
 
         if($startDate) {
             $query->whereHas('transaction_header', function ($subQuery) use ($startDate) {
