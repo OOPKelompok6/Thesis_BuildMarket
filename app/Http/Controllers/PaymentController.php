@@ -36,7 +36,7 @@ class PaymentController extends Controller
         $payment = request()->validate([
             'vendor' => ['required'],
             'expiration_Date' => ['required', 'date', 'after_or_equal:today'],
-            'cardNumber' => ['required', 'min:16', 'regex:/^[a-z0-9\s]+$/i'],
+            'cardNumber' => ['required', 'min:16', 'regex:/^\d+$/'],
             'billingAddress' => ['required']
         ], [
             'vendor.required' => 'Card vendor is required',
