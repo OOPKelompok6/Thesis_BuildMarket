@@ -45,7 +45,7 @@ class ItemManagementController extends Controller
             'price' => ['required|numeric|min:1'],
             'description' => ['required|max:65534']
         ], [
-            'name.required' => 'Email is required.',
+            'name.required' => 'Name is required.',
             'brand.required' => 'Brand is required.',
             'category.required' => 'Category is required.',
             'quantity.required' => 'quantity is required.',
@@ -74,7 +74,7 @@ class ItemManagementController extends Controller
             'price' => ['required|numeric|min:1'],
             'description' => ['required|max:65534']
         ], [
-            'name.required' => 'Email is required.',
+            'name.required' => 'Name is required.',
             'brand.required' => 'Brand is required.',
             'category.required' => 'Category is required.',
             'quantity.required' => 'quantity is required.',
