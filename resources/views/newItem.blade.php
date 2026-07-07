@@ -5,6 +5,7 @@
         <div class="mb-3">
             <label for="itemName" class="text-light form-label">Item name</label>
             <input @if(request()->routeIs('editItem')) value="{{ $item->name }}" @endif name="name" type="text" class="form-control" id="itemName">
+            <x-errorValidationLabel name="name"></x-errorValidationLabel>
         </div>
 
         <div class="d-flex flex-row gap-4 mb-3">
@@ -22,6 +23,7 @@
                         </option>
                     @endforeach
                 </select>
+                <x-errorValidationLabel name="category"></x-errorValidationLabel>
             </div>
 
             <div class="d-flex flex-column flex-grow-1">
@@ -38,17 +40,20 @@
                         </option>
                     @endforeach
                 </select>
+                <x-errorValidationLabel name="brand"></x-errorValidationLabel>
             </div>
         </div>
 
         <div class="mb-3">
             <label for="quantityValue" class="text-light form-label">Quantity</label>
             <input @if(request()->routeIs('editItem')) value="{{ $item->quantity }}" @endif type="number" value="1" min="1" class="form-control" id="quantityValue" name="quantity">
+            <x-errorValidationLabel name="quantity"></x-errorValidationLabel>
         </div>
 
         <div class="mb-3">
             <label for="priceId" class="text-light form-label">Price</label>
             <input @if(request()->routeIs('editItem')) value="{{ $item->price }}" @endif type="number" min="1" value="1" class="form-control" id="priceId" name="price">
+            <x-errorValidationLabel name="price"></x-errorValidationLabel>
         </div>
 
         <div class="mb-3">
@@ -56,6 +61,7 @@
             <textarea name="description" class="form-control" id="descriptionTextArea" rows="3">
                 @if(request()->routeIs('editItem')) {{ $item->description }} @endif
             </textarea>
+            <x-errorValidationLabel name="description"></x-errorValidationLabel>
         </div>
         <script src="{{secure_asset('js/tinymce/tinymceConfig.js')}}"></script>
 

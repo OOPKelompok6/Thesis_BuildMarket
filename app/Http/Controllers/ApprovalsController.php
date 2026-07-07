@@ -27,7 +27,7 @@ class ApprovalsController extends Controller
             'NIBDocument' => ['required', 'file', 'mimes:pdf']
         ], [
             'npwp_number.required' => 'NPWP Number is required.',
-            'npwp_number.digits' => 'NPWP Number is of length 16.',
+            'npwp_number.digits' => 'NPWP Number is numerical and of length 16.',
 
             'NIBDocument.required' => 'NIB Document is required.',
             'NIBDocument.file' => 'NIB Document must be a file.',
