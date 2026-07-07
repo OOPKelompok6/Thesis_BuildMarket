@@ -41,9 +41,22 @@ class ItemManagementController extends Controller
             'name' => ['required'],
             'brand' => ['required'],
             'category' => ['required'],
-            'quantity' => ['required'],
-            'price' => ['required'],
-            'description' => ['required'],
+            'quantity' => ['required|numeric|min:1'],
+            'price' => ['required|numeric|min:1'],
+            'description' => ['required|max:65534']
+        ], [
+            'name.required' => 'Email is required.',
+            'brand.required' => 'Brand is required.',
+            'category.required' => 'Category is required.',
+            'quantity.required' => 'quantity is required.',
+            'price.required' => 'Price is required.',
+            'description.required' => 'Description is required.',
+
+            'quantity.min' => 'Quantity minimum is 1.',
+            'quantity.numeric' => 'Quantity must be numeric.',
+            'price.min' => 'Price minimum is 1.',
+            'price.numeric' => 'Price must be numeric.',
+            'description.max' => 'Description is over the max 65.534.'
         ]);
         $item['description'] = Purifier::clean($item['description']);
         $this->itemService->createItem($item);
@@ -57,9 +70,22 @@ class ItemManagementController extends Controller
             'name' => ['required'],
             'brand' => ['required'],
             'category' => ['required'],
-            'quantity' => ['required'],
-            'price' => ['required'],
-            'description' => ['required'],
+             'quantity' => ['required|numeric|min:1'],
+            'price' => ['required|numeric|min:1'],
+            'description' => ['required|max:65534']
+        ], [
+            'name.required' => 'Email is required.',
+            'brand.required' => 'Brand is required.',
+            'category.required' => 'Category is required.',
+            'quantity.required' => 'quantity is required.',
+            'price.required' => 'Price is required.',
+            'description.required' => 'Description is required.',
+
+            'quantity.min' => 'Quantity minimum is 1.',
+            'quantity.numeric' => 'Quantity must be numeric.',
+            'price.min' => 'Price minimum is 1.',
+            'price.numeric' => 'Price must be numeric.',
+            'description.max' => 'Description is over the max 65.534.'
         ]);
         $item_newParams['description'] = Purifier::clean($item_newParams['description']);
         $this->itemService->updateItem($item, $item_newParams);
