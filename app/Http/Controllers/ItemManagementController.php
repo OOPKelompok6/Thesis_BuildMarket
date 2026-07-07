@@ -41,9 +41,9 @@ class ItemManagementController extends Controller
             'name' => ['required'],
             'brand' => ['required'],
             'category' => ['required'],
-            'quantity' => ['required|numeric|min:1'],
-            'price' => ['required|numeric|min:1'],
-            'description' => ['required|max:65534']
+            'quantity' => ['required', 'numeric', 'min:1'],
+            'price' => ['required', 'numeric', 'min:1'],
+            'description' => ['required', 'max:65534']
         ], [
             'name.required' => 'Name is required.',
             'brand.required' => 'Brand is required.',
@@ -70,9 +70,9 @@ class ItemManagementController extends Controller
             'name' => ['required'],
             'brand' => ['required'],
             'category' => ['required'],
-             'quantity' => ['required|numeric|min:1'],
-            'price' => ['required|numeric|min:1'],
-            'description' => ['required|max:65534']
+            'quantity' => ['required', 'numeric', 'min:1'],
+            'price' => ['required', 'numeric', 'min:1'],
+            'description' => ['required', 'max:65534']
         ], [
             'name.required' => 'Name is required.',
             'brand.required' => 'Brand is required.',
